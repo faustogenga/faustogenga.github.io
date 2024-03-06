@@ -1,3 +1,3 @@
-export const home = () => {
-    <h1>FG Portfolio</h1>
+export const Home = () => {
+    return <h1>FG Portfolio</h1>
 }
