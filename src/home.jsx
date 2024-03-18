@@ -9,6 +9,7 @@ import SplitTextJS from 'split-text-js';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import './Fonts.css';
+import './Responsive.css';
 
 
 
@@ -56,7 +57,7 @@ const Text = () => {
 
 const Bio = () => {
   return (
-    <div className='col-6' style={{ fontFamily: 'RedHatDisplay-Medium', color: '#343434', textAlign: "justify" }}>
+    <div className='ResponsiveBio col-6' style={{ fontFamily: 'RedHatDisplay-Medium', color: '#343434', textAlign: "justify" }}>
       <h5>Hi there 👋</h5>
       <br />
       My name is Fausto Genga, a recent graduate in Informatics Engineering, where I refined my skills in effective communication, adaptability, and collaboration.
@@ -86,19 +87,19 @@ const Projects = () => {
   return (
     <div className='d-flex flex-column align-items-center'>
       {/*Project 1*/}
-      <div className='col-10 d-flex justify-content-center'>
-        <div className='w-100 text-center'>
+      <div className='ResponsiveProjects col-10 d-flex justify-content-center'>
+        <div className='ProjectSlides w-100 text-center'>
           <div className='py-5 px-4'>
             <Slider autoplay={3000} >
-              <img src="/public/1.jpg" style={{ borderRadius: "10px" }} alt="Project Image 1" />
-              <img src="/public/4.jpg" style={{ borderRadius: "10px" }} alt="Project Image 4" />
-              <img src="/public/2.jpg" style={{ borderRadius: "10px" }} alt="Project Image 2" />
-              <img src="/public/3.jpg" style={{ borderRadius: "10px" }} alt="Project Image 3" />
+              <img src="1.jpg" style={{ borderRadius: "10px" }} alt="Project Image 1" />
+              <img src="4.jpg" style={{ borderRadius: "10px" }} alt="Project Image 4" />
+              <img src="2.jpg" style={{ borderRadius: "10px" }} alt="Project Image 2" />
+              <img src="3.jpg" style={{ borderRadius: "10px" }} alt="Project Image 3" />
             </Slider>
           </div>
         </div>
-        <div className='w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
-          <div style={{ fontSize: "4vh", fontFamily: 'RedHatDisplay-Medium', color: '#343434' }}>
+        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
+          <div className='ProjectTitle' style={{ fontSize: "4vh", fontFamily: 'RedHatDisplay-Medium', color: '#343434' }}>
             FutStore CR
             <FontAwesomeIcon className='mx-1' icon={faFutbol} style={{ fontSize: "20px" }} />
           </div>
@@ -124,9 +125,9 @@ const Projects = () => {
       </div>
 
       {/* Project 2*/}
-      <div className='col-10 d-flex justify-content-center'>
-        <div className='w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
-          <div style={{ fontSize: "4vh", fontFamily: 'RedHatDisplay-Medium', color: '#343434' }}>
+      <div className='ResponsiveProjects col-10 d-flex justify-content-center'>
+        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
+          <div className='ProjectTitle' style={{ fontSize: "4vh", fontFamily: 'RedHatDisplay-Medium', color: '#343434' }}>
             ULACIT Parking Service 🚗
           </div>
           <div className='m-2'>
@@ -150,35 +151,37 @@ const Projects = () => {
             All resources are used for learning / school related purposes.
           </div>
         </div>
-        <div className='w-100 text-center'>
+        <div className='ProjectSlides w-100 text-center'>
           <div className='py-5 px-4'>
             <Slider autoplay={4000} >
-              <img src="/public/11.jpg" style={{ borderRadius: "10px" }} alt="Project Image 1" />
-              <img src="/public/22.jpg" style={{ borderRadius: "10px" }} alt="Project Image 2" />
-              <img src="/public/33.jpg" style={{ borderRadius: "10px" }} alt="Project Image 3" />
-              <img src="/public/44.jpg" style={{ borderRadius: "10px" }} alt="Project Image 4" />
+              <img src="11.jpg" style={{ borderRadius: "10px" }} alt="Project Image 1" />
+              <img src="22.jpg" style={{ borderRadius: "10px" }} alt="Project Image 2" />
+              <img src="33.jpg" style={{ borderRadius: "10px" }} alt="Project Image 3" />
+              <img src="44.jpg" style={{ borderRadius: "10px" }} alt="Project Image 4" />
             </Slider>
           </div>
         </div>
       </div>
+
+
       {/*Project 3*/}
-      <div className='col-10 d-flex justify-content-center'>
-        <div className='w-100 text-center'>
+      <div className='ResponsiveProjects col-10 d-flex justify-content-center'>
+        <div className='ProjectSlides w-100 text-center'>
           <div className='py-5 px-4'>
             <Slider autoplay={3000} >
-              <img src="/public/222.jpg" style={{ borderRadius: "10px" }} alt="Project Image 2" />
-              <img src="/public/111.jpg" style={{ borderRadius: "10px" }} alt="Project Image 1" />
+              <img src="222.jpg" style={{ borderRadius: "10px" }} alt="Project Image 2" />
+              <img src="111.jpg" style={{ borderRadius: "10px" }} alt="Project Image 1" />
             </Slider>
           </div>
         </div>
-        <div className='w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
-          <div style={{ fontSize: "4vh", fontFamily: 'RedHatDisplay-Medium', color: '#343434' }}>
+        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
+          <div className='ProjectTitle' style={{ fontSize: "4vh", fontFamily: 'RedHatDisplay-Medium', color: '#343434' }}>
             College Registration WEB API
           </div>
           <div>
-            <div className='m-2'>
+            <div className='m-2' style={{ overflow: 'auto' }}>
               <FontAwesomeIcon icon={faGithub} style={{ marginRight: '8px' }} />
-              <a href='https://github.com/faustogenga/WebAPIMatricula_1C2023' className='link-info' target='_blank'>https://github.com/faustogenga/WebAPIMatricula_1C2023</a>
+              <a href='https://github.com/faustogenga/WebAPIMatricula_1C2023' className='link-info overflow-auto' target='_blank'>https://github.com/faustogenga/WebAPIMatricula_1C2023</a>
             </div>
           </div>
           Web Service API on ASP.NET Prototype <br /><br />
@@ -245,7 +248,7 @@ const Home = () => {
         </Canvas>
       </div>
       <div className='d-flex justify-content-center' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
-        <div className='col-3 text-center' style={{ borderTop: "0.1px solid black" }}>
+        <div className='ResponsiveSubHeading col-3 text-center' style={{ borderTop: "0.1px solid black" }}>
           <div className='text-wrapper m-4'>
             <h4 className="m-0" style={{ fontFamily: 'RedHatDisplay-Bold', color: '#343434', cursor: 'default', lineHeight: 0 }}>PORTFOLIO</h4>
             <h4 className="m-0" style={{ fontFamily: 'RedHatDisplay-Bold', color: '#343434', cursor: 'default', lineHeight: 0 }}>PROJECTS</h4>

@@ -1,0 +1,32 @@
+@media only screen and (max-device-width: 767px) {
+    .ResponsiveSubHeading {
+        width: 90% !important;
+    }
+
+    .ResponsiveBio {
+        width: 90% !important;
+    }
+
+    .ResponsiveProjects {
+        display: flex;
+        flex-direction: column;
+        width: 90% !important;
+    }
+
+    .ProjectInfo {
+        order: 1;
+        padding: 0 !important
+    }
+    .ProjectSlides {
+        order: 2;
+    }
+
+    .ProjectSlides div {
+        padding: 0 !important;
+        margin: 5% 0% !important
+    }
+
+    .ProjectTitle {
+        font-size: 2rem !important;
+    }
+}
