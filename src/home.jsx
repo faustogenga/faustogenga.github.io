@@ -65,7 +65,7 @@ const Home = () => {
         <Bio />
       </div>
       <div className="d-flex justify-content-center mt-4">
-        <p style={{ fontFamily: "RedHatDisplay-Regular", borderBottom: "2px solid", borderColor: "#8398FC" }} className='p-1'>Some College Projects 👇</p>
+        <p style={{ fontFamily: "RedHatDisplay-Regular", borderBottom: "2px solid", borderColor: "#8398FC" }} className='p-1'>Some Coding Projects 👇</p>
       </div>
       <Projects />
       <div className='text-center p-4 bg-black' style={{ color: "whitesmoke", fontFamily: "RedHatDisplay-Bold" }}>
