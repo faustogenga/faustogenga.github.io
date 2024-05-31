@@ -13,8 +13,8 @@ export const Projects = () => {
         <div className='ProjectSlides w-100 text-center'>
           <div className='py-5 px-4'>
             <Slider autoplay={3000} >
-              <img src="1010.jpg" style={{ borderRadius: "10px" }} alt="Project Image 1" />
-              <img src="2020.jpg" style={{ borderRadius: "10px" }} alt="Project Image 4" />
+              <img src="2020.jpg" style={{ borderRadius: "10px" }} alt="Project Image 1" />
+              <img src="1010.jpg" style={{ borderRadius: "10px" }} alt="Project Image 2" />
             </Slider>
           </div>
         </div>
