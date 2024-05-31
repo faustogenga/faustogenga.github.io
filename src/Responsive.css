@@ -7,6 +7,10 @@
         width: 90% !important;
     }
 
+    .ResponsiveBioLinks {
+        flex-direction: column !important;
+    }
+
     .ResponsiveProjects{
         display: flex;
         flex-direction: column;
@@ -20,6 +24,7 @@
     }
 
     .ProjectSlides div{
+        height: 35vh !important;
         padding: 1% !important;
     }
 
