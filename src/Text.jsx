@@ -1,38 +1,46 @@
-import { useRef } from 'react';
-import { Text3D, Center } from '@react-three/drei';
-import { useFrame, useThree } from '@react-three/fiber';
-import * as THREE from 'three';
+import { useRef } from 'react'
+import { Text3D, Center } from '@react-three/drei'
+import { useFrame, useThree } from '@react-three/fiber'
+import * as THREE from 'three'
 
 export const Text = () => {
-  const groupRef = useRef();
-  const { mouse } = useThree();
+  const groupRef = useRef()
+  const { mouse } = useThree()
 
   useFrame(() => {
     if (groupRef.current) {
-      // Directly use mouse values to adjust rotation.
-      // Multiply by a factor (e.g., 0.5) to control the intensity.
-      groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, mouse.y * 0.5, 0.1);
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, mouse.x * 0.5, 0.1);
+      // Invert mouse.y for a more natural tilt:
+      groupRef.current.rotation.x = THREE.MathUtils.lerp(
+        groupRef.current.rotation.x,
+        -mouse.y * 0.2,
+        0.1
+      )
+      // If you want to invert X as well, add a minus here:
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(
+        groupRef.current.rotation.y,
+        mouse.x * 0.2,
+        0.1
+      )
     }
-  });
+  })
 
   return (
     <>
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1.5} />
       <Center>
-        <group ref={groupRef}>
+        <group ref={groupRef} position={[3, 0, 0]}>
           <Text3D
-            font={"/Inter_Bold (1).json"}
-            size={0.9}
+            font="/Inter_Bold (1).json" 
+            size={1}
             height={0.2}
-            curveSegments={24}
+            curveSegments={32}
             bevelEnabled={true}
             bevelThickness={0.03}
-            bevelSize={0.02}
+            bevelSize={0.05}
             bevelOffset={0}
             bevelSegments={10}
-            letterSpacing={0.05}
+            position={[-3, 0, 0]}
           >
             Fausto Genga
             <meshBasicMaterial
@@ -46,5 +54,5 @@ export const Text = () => {
         </group>
       </Center>
     </>
-  );
-};
+  )
+}
