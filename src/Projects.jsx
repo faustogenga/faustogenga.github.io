@@ -18,7 +18,7 @@ export const Projects = () => {
             </Slider>
           </div>
         </div>
-        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
+        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#f5f5f5' }}>
           <div className='ProjectTitle' style={{ fontFamily: 'RedHatDisplay-Medium' }}>
             AI PDF Inquire Fullstack
             <FontAwesomeIcon className='mx-1' icon={faComments} style={{ fontSize: "20px" }} />
@@ -68,7 +68,7 @@ export const Projects = () => {
             </Slider>
           </div>
         </div>
-        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
+        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#f5f5f5' }}>
           <div className='ProjectTitle' style={{ fontFamily: 'RedHatDisplay-Medium' }}>
             FutStore CR
             <FontAwesomeIcon className='mx-1' icon={faFutbol} style={{ fontSize: "20px" }} />
@@ -104,7 +104,7 @@ export const Projects = () => {
 
       {/* Project 3*/}
       <div className='ResponsiveProjects col-10 d-flex justify-content-center'>
-        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
+        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#f5f5f5' }}>
           <div className='ProjectTitle' style={{ fontFamily: 'RedHatDisplay-Medium' }}>
             ULACIT Parking Service 🚗
           </div>
@@ -161,7 +161,7 @@ export const Projects = () => {
             </Slider>
           </div>
         </div>
-        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
+        <div className='ProjectInfo w-100 text-center py-5 px-4' style={{ fontFamily: 'RedHatDisplay-Regular', color: '#f5f5f5' }}>
           <div className='ProjectTitle' style={{ fontFamily: 'RedHatDisplay-Medium' }}>
             College Registration WEB API
           </div>

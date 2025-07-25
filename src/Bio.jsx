@@ -9,9 +9,9 @@ export const Bio = () => {
   ];
 
   return (
-    <div className='ResponsiveBio col-8' style={{ fontFamily: 'RedHatDisplay-Medium', color: '#343434', textAlign: "justify" }}>
+    <div className='ResponsiveBio col-8' style={{ fontFamily: 'RedHatDisplay-Medium', color: '#f5f5f5', textAlign: "justify" }}>
       <div className="bio-header">
-        <h2 style={{ fontFamily: 'RedHatDisplay-Bold', marginBottom: '1rem', color: '#343434' }}>About Me</h2>
+        <h2 style={{ fontFamily: 'RedHatDisplay-Bold', marginBottom: '1rem', color: '#f5f5f5' }}>About Me</h2>
       </div>
       
       <div className="bio-content">
@@ -43,7 +43,7 @@ export const Bio = () => {
       
       {/* Skills section */}
       <div className="skills-section mt-4 mb-3">
-        <h3 style={{ fontFamily: 'RedHatDisplay-Bold', color: '#343434' }}>Skills</h3>
+        <h3 style={{ fontFamily: 'RedHatDisplay-Bold', color: '#f5f5f5' }}>Skills</h3>
         <div className="skills-container">
           {skills.map((skill, index) => (
             <span key={index} className="skill-badge">{skill}</span>
@@ -51,7 +51,7 @@ export const Bio = () => {
         </div>
       </div>
       
-      <div className="bio-contact" style={{ fontFamily: 'RedHatDisplay-Regular', color: '#343434' }}>
+      <div className="bio-contact" style={{ fontFamily: 'RedHatDisplay-Regular', color: '#f5f5f5' }}>
         <div className='ResponsiveBioLinks mt-4 d-flex'>
           <div className='contact-item mt-1 mx-1'>
             <FontAwesomeIcon className='link-dark' icon={faGithub} style={{ marginRight: '8px' }} />
