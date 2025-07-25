@@ -79,6 +79,8 @@ const Home = () => {
       
       {/* Hero section with precisely controlled spacing */}
       <div className='hero-section position-relative'>
+        {/* Decorative floating shapes for extra flair */}
+        <div className="floating-shapes" />
         {/* 3D Text */}
         <Canvas 
           orthographic 
@@ -96,9 +98,9 @@ const Home = () => {
         
         {/* Tagline with precise spacing */}
         <div className="text-center" style={{ marginBottom: '30px' }}>
-          <p className="tagline" style={{ 
+          <p className="tagline" style={{
             fontFamily: 'RedHatDisplay-Medium',
-            color: '#343434',
+            color: '#f5f5f5',
             padding: '0',
             margin: '0',
             fontWeight: '600',
@@ -111,8 +113,8 @@ const Home = () => {
       
       {/* Section divider - with ONLY ONE border line */}
       <div className='d-flex justify-content-center' style={{ 
-        fontFamily: 'RedHatDisplay-Regular', 
-        color: '#343434',
+        fontFamily: 'RedHatDisplay-Regular',
+        color: '#f5f5f5',
         marginBottom: '30px'
       }}>
         {/* This div has the ONLY border */}
@@ -123,7 +125,7 @@ const Home = () => {
           <div className='text-wrapper m-2'>
             <h4 style={{ 
               fontFamily: 'RedHatDisplay-Bold', 
-              color: '#343434', 
+              color: '#f5f5f5',
               cursor: 'default',
               opacity: 1, // Ensure it's always visible
               transform: 'none' // Remove any transform that might be applied
@@ -140,15 +142,15 @@ const Home = () => {
       {/* Projects section with better heading */}
       <div className="d-flex justify-content-center mt-5 mb-4">
         <div className="section-heading">
-          <h2 style={{ fontFamily: "RedHatDisplay-Bold", color: "#343434" }}>Featured Projects</h2>
+          <h2 style={{ fontFamily: "RedHatDisplay-Bold", color: "#f5f5f5" }}>Featured Projects</h2>
           <div className="heading-underline"></div>
         </div>
       </div>
       <Projects />
       
       {/* Improved footer */}
-      <footer className='p-4 text-center' style={{ 
-        background: "linear-gradient(135deg, #343434, #1a1a1a)",
+      <footer className='p-4 text-center' style={{
+        background: "linear-gradient(135deg, #2c2c2c, #000)",
         position: "relative",
         overflow: "hidden"
       }}>

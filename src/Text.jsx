@@ -43,12 +43,12 @@ export const Text = () => {
             position={[-3, 0, 0]}
           >
             Fausto Genga
-            <meshBasicMaterial
-              color="#8398FC"
-              wireframe={true}
-              transparent={true}
-              opacity={0.6}
-              side={THREE.BackSide}
+            <meshStandardMaterial
+              color="#ffffff"
+              emissive="#8398FC"
+              emissiveIntensity={0.6}
+              metalness={0.2}
+              roughness={0.3}
             />
           </Text3D>
         </group>
