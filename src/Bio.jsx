@@ -43,7 +43,7 @@ export const Bio = () => {
       
       {/* Skills section */}
       <div className="skills-section mt-4 mb-3">
-        <h3 style={{ fontFamily: 'RedHatDisplay-Bold', olor: '#343434' }}>Skills</h3>
+        <h3 style={{ fontFamily: 'RedHatDisplay-Bold', color: '#343434' }}>Skills</h3>
         <div className="skills-container">
           {skills.map((skill, index) => (
             <span key={index} className="skill-badge">{skill}</span>
