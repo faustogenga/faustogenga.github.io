@@ -100,7 +100,7 @@ const Home = () => {
         <div className="text-center" style={{ marginBottom: '30px' }}>
           <p className="tagline" style={{
             fontFamily: 'RedHatDisplay-Medium',
-            color: '#f5f5f5',
+            color: '#000000',
             padding: '0',
             margin: '0',
             fontWeight: '600',
@@ -114,7 +114,7 @@ const Home = () => {
       {/* Section divider - with ONLY ONE border line */}
       <div className='d-flex justify-content-center' style={{ 
         fontFamily: 'RedHatDisplay-Regular',
-        color: '#f5f5f5',
+        color: '#000000',
         marginBottom: '30px'
       }}>
         {/* This div has the ONLY border */}
@@ -125,7 +125,7 @@ const Home = () => {
           <div className='text-wrapper m-2'>
             <h4 style={{ 
               fontFamily: 'RedHatDisplay-Bold', 
-              color: '#f5f5f5',
+              color: '#000000',
               cursor: 'default',
               opacity: 1, // Ensure it's always visible
               transform: 'none' // Remove any transform that might be applied
@@ -142,7 +142,7 @@ const Home = () => {
       {/* Projects section with better heading */}
       <div className="d-flex justify-content-center mt-5 mb-4">
         <div className="section-heading">
-          <h2 style={{ fontFamily: "RedHatDisplay-Bold", color: "#f5f5f5" }}>Featured Projects</h2>
+          <h2 style={{ fontFamily: "RedHatDisplay-Bold", color: "#000000" }}>Featured Projects</h2>
           <div className="heading-underline"></div>
         </div>
       </div>
@@ -170,7 +170,7 @@ const Home = () => {
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
           <div className="row">
             <div className="col-12 mb-3">
-              <p style={{ color: "whitesmoke", fontFamily: "RedHatDisplay-Medium", fontSize: "1.2rem" }}>Let's connect!</p>
+              <p style={{ color: "#000000", fontFamily: "RedHatDisplay-Medium", fontSize: "1.2rem" }}>Let's connect!</p>
             </div>
             <div className="col-12 social-links">
               <a href='https://github.com/faustogenga' className='btn btn-outline-light mx-2' target='_blank'>
@@ -184,7 +184,7 @@ const Home = () => {
               </a>
             </div>
             <div className="col-12 mt-3">
-              <p style={{ color: "#aaa", fontFamily: "RedHatDisplay-Regular", fontSize: "0.9rem" }}>
+              <p style={{ color: "#000000", fontFamily: "RedHatDisplay-Regular", fontSize: "0.9rem" }}>
                 © {new Date().getFullYear()} Fausto Genga. All rights reserved.
               </p>
             </div>
@@ -203,7 +203,7 @@ const Home = () => {
           height: "50px",
           borderRadius: "50%",
           background: "linear-gradient(135deg, #8398FC, #6C7FE3)",
-          color: "white",
+          color: "#000000",
           border: "none",
           boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
           zIndex: 1000,

@@ -12,7 +12,7 @@
     "deploy": "gh-pages -d dist",
     "profile": "vite --profile"
   }, 
-  "homepage": "https://faustogenga.github.io/faustogenga.github.io/",
+  "homepage": "https://faustogenga.github.io/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-brands-svg-icons": "^6.5.1",

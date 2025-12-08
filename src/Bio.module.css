@@ -7,7 +7,7 @@
 }
 
 .skills-title {
-    color: #fff;
+    color: #000;
     text-align: center;
     margin-bottom: 2rem;
     font-size: 2rem;
@@ -54,7 +54,7 @@
 }
 
 .tech-name {
-    color: #fff;
+    color: #000;
     font-weight: 500;
     font-size: 1.1rem;
     text-transform: uppercase;
