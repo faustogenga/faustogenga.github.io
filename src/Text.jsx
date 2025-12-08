@@ -31,7 +31,7 @@ export const Text = () => {
       <Center>
         <group ref={groupRef} position={[3, 0, 0]}>
           <Text3D
-            font="/Inter_Bold (1).json" 
+            font="/Inter_Bold.json" 
             size={1}
             height={0.2}
             curveSegments={32}
