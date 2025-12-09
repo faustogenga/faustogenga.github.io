@@ -1,230 +1,234 @@
-import { Canvas } from '@react-three/fiber';
-import { useEffect } from 'react';
-import gsap from 'gsap';
-import SplitTextJS from 'split-text-js';
-import 'react-animated-slider/build/horizontal.css';
-import './Fonts.css';
-import './Responsive.css';
+import './styles/Fonts.css';
+import './styles/Responsive.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
-import { Text } from './Text';
-import { Bio } from './Bio';
-import { Projects } from './Projects';
+import { Bio } from './components/Bio';
+import { Projects } from './components/Projects';
 
 const Home = () => {
 
-  useEffect(() => {
-    // Clear any existing animations first
-    gsap.killTweensOf('h4 .char');
-    
-    const titles = gsap.utils.toArray('h4');
-    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
-
-    titles.forEach((title) => {
-      // Make sure the title is visible before splitting
-      gsap.set(title, { opacity: 1 });
-      
-      try {
-        const splitText = new SplitTextJS(title);
-        
-        tl.fromTo(
-          splitText.chars, 
-          {
-            opacity: 0,
-            y: 20,
-            rotateX: -80,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            stagger: 0.03,
-            duration: 0.8,
-            ease: "power2.out"
-          },
-          "+=0.3"
-        ).to(
-          splitText.chars, 
-          {
-            opacity: 0,
-            y: -20,
-            rotateX: 80,
-            stagger: 0.03,
-            duration: 0.8,
-            ease: "power2.in"
-          },
-          "+=1"
-        );
-      } catch (error) {
-        console.error("Error with SplitTextJS:", error);
-      }
-    });
-    
-    return () => {
-      gsap.killTweensOf('h4 .char');
-    };
-  }, []);
-
   return (
-    <div style={{ backgroundColor: "#FAFAFA" }}>
-      {/* Modern gradient header bar with animation */}
-      <div style={{ 
-        background: "linear-gradient(90deg, #8398FC, #6C7FE3, #8398FC)", 
-        height: "0.5vh",
-        backgroundSize: "200% 100%",
-        animation: "gradientMove 3s ease infinite"
-      }} className='' />
-      
-      {/* Hero section with precisely controlled spacing */}
-      <div className='hero-section position-relative'>
-        {/* Decorative floating shapes for extra flair */}
-        <div className="floating-shapes" />
-        {/* 3D Text */}
-        <Canvas 
-          orthographic 
-          camera={{ position: [0, 0, 100], zoom: 100 }} 
-          style={{ 
-            height: "35vh", 
-            marginBottom: '-30px' // No margin after canvas
-          }}
-        >
-          <Text/>
-        </Canvas>
-        
-        {/* Background pattern */}
-        <div className="animated-bg-pattern"></div>
-        
-        {/* Tagline with precise spacing */}
-        <div className="text-center" style={{ marginBottom: '30px' }}>
-          <p className="tagline" style={{
-            fontFamily: 'RedHatDisplay-Medium',
-            color: '#000000',
-            padding: '0',
-            margin: '0',
-            fontWeight: '600',
-            letterSpacing: '1.5px'
-          }}>
-            INFORMATICS ENGINEER | FRONTEND DEVELOPER | DATA ENTHUSIAST
-          </p>
-        </div>
+    <div className="elegant-background" style={{ 
+      minHeight: '100vh',
+      position: 'relative'
+    }}>
+      {/* Floating particles */}
+      <div className="floating-particles">
+        {[...Array(18)].map((_, i) => (
+          <div key={i} className="particle" style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 8}s`,
+            animationDuration: `${12 + Math.random() * 8}s`
+          }} />
+        ))}
       </div>
       
-      {/* Section divider - with ONLY ONE border line */}
-      <div className='d-flex justify-content-center' style={{ 
-        fontFamily: 'RedHatDisplay-Regular',
-        color: '#000000',
-        marginBottom: '30px'
+      {/* Elegant gradient header bar */}
+      <div className="cool-header-bar" style={{ 
+        background: "linear-gradient(90deg, #8398FC, #6C7FE3, #8398FC, #6C7FE3, #8398FC)", 
+        height: "4px",
+        backgroundSize: "300% 100%",
+        animation: "gradientMove 3s ease infinite",
+        boxShadow: '0 2px 12px rgba(131, 152, 252, 0.3), 0 0 20px rgba(131, 152, 252, 0.1)',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        {/* This div has the ONLY border */}
-        <div className='ResponsiveSubHeading col-3 text-center' style={{ 
-          borderTop: "2px solid #8398FC",
-          position: "relative" 
-        }}>
-          <div className='text-wrapper m-2'>
-            <h4 style={{ 
-              fontFamily: 'RedHatDisplay-Bold', 
-              color: '#000000',
-              cursor: 'default',
-              opacity: 1, // Ensure it's always visible
-              transform: 'none' // Remove any transform that might be applied
-            }}>PORTFOLIO</h4>
+        <div className="header-glow" />
+      </div>
+      
+      {/* Elegant hero section */}
+      <div className='hero-section' style={{ 
+        paddingTop: '60px', 
+        paddingBottom: '30px',
+        position: 'relative',
+        zIndex: 1
+      }}>
+        <div className="text-center">
+          <h1 className="cool-name" style={{
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "RedHatDisplay-Bold", sans-serif',
+            fontSize: 'clamp(2.2rem, 5vw, 3.2rem)',
+            margin: '0 0 8px 0',
+            fontWeight: '700',
+            letterSpacing: '-0.03em',
+            background: 'linear-gradient(135deg, #8398FC 0%, #6C7FE3 25%, #9d7fff 50%, #1a1a1a 75%, #8398FC 100%)',
+            backgroundSize: '300% 300%',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            animation: 'gradientShift 5s ease infinite, nameGlow 3s ease-in-out infinite',
+            filter: 'drop-shadow(0 2px 8px rgba(131, 152, 252, 0.2))',
+            position: 'relative',
+            cursor: 'default',
+            display: 'inline-block'
+          }}>
+            Fausto Genga
+            <span className="name-glow" />
+          </h1>
+          <p className="cool-subtitle" style={{
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "RedHatDisplay-Regular", sans-serif',
+            color: '#6b7280',
+            fontSize: '0.95rem',
+            margin: '0 0 20px 0',
+            letterSpacing: '0.5px',
+            fontWeight: '400',
+            opacity: 0,
+            animation: 'fadeInUp 0.8s ease 0.2s forwards'
+          }}>
+            Informatics Engineer · Fullstack Developer · Data Enthusiast
+          </p>
+          
+          {/* Contact links under name */}
+          <div className="hero-contact-links" style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '1.5rem',
+            flexWrap: 'wrap',
+            marginTop: '20px',
+            opacity: 0,
+            animation: 'fadeInUp 0.8s ease 0.4s forwards'
+          }}>
+            <a href='https://github.com/faustogenga' target='_blank' rel="noreferrer" className="hero-link" style={{ 
+              color: '#4a5568', 
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontSize: '0.9rem',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "RedHatDisplay-Medium", sans-serif',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              position: 'relative',
+              overflow: 'hidden'
+            }} onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#8398FC';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.background = 'rgba(131, 152, 252, 0.08)';
+            }} onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#4a5568';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.background = 'transparent';
+            }}>
+              <FontAwesomeIcon icon={faGithub} /> GitHub
+            </a>
+            <a href='https://www.linkedin.com/in/fausto-genga-695b68251/' target='_blank' rel="noreferrer" className="hero-link" style={{ 
+              color: '#4a5568', 
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontSize: '0.9rem',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "RedHatDisplay-Medium", sans-serif',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              position: 'relative',
+              overflow: 'hidden'
+            }} onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#8398FC';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.background = 'rgba(131, 152, 252, 0.08)';
+            }} onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#4a5568';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.background = 'transparent';
+            }}>
+              <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
+            </a>
+            <a href='mailto:faustogengaalfaro@gmail.com' className="hero-link" style={{ 
+              color: '#4a5568', 
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontSize: '0.9rem',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "RedHatDisplay-Medium", sans-serif',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              position: 'relative',
+              overflow: 'hidden'
+            }} onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#8398FC';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.background = 'rgba(131, 152, 252, 0.08)';
+            }} onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#4a5568';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.background = 'transparent';
+            }}>
+              ✉️ Email
+            </a>
+            <a href='/Fausto_Genga_Resume.pdf' download className="hero-link" style={{ 
+              color: '#4a5568', 
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontSize: '0.9rem',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "RedHatDisplay-Medium", sans-serif',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              padding: '8px 16px',
+              borderRadius: '8px',
+              position: 'relative',
+              overflow: 'hidden'
+            }} onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#8398FC';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.background = 'rgba(131, 152, 252, 0.08)';
+            }} onMouseLeave={(e) => {
+              e.currentTarget.style.color = '#4a5568';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.background = 'transparent';
+            }}>
+              <FontAwesomeIcon icon={faDownload} /> CV
+            </a>
           </div>
         </div>
       </div>
       
-      {/* Bio section with controlled spacing */}
-      <div className='d-flex justify-content-center text-justify' style={{ marginTop: '0px' }}>
+      {/* Bio section */}
+      <div className='d-flex justify-content-center' style={{ marginTop: '40px', marginBottom: '60px', position: 'relative', zIndex: 1 }}>
         <Bio />
       </div>
       
-      {/* Projects section with better heading */}
-      <div className="d-flex justify-content-center mt-5 mb-4">
-        <div className="section-heading">
-          <h2 style={{ fontFamily: "RedHatDisplay-Bold", color: "#000000" }}>Featured Projects</h2>
-          <div className="heading-underline"></div>
-        </div>
+      {/* Projects section */}
+      <div className="d-flex justify-content-center" style={{ marginTop: '50px', marginBottom: '30px', position: 'relative', zIndex: 1 }}>
+        <h2 className="cool-section-title" style={{ 
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "RedHatDisplay-Bold", sans-serif', 
+          color: '#1a1a1a', 
+          fontSize: 'clamp(1.4rem, 3vw, 1.8rem)', 
+          margin: 0,
+          fontWeight: '700',
+          letterSpacing: '-0.02em',
+          opacity: 0,
+          animation: 'fadeInUp 0.8s ease 0.6s forwards'
+        }}>Some Projects</h2>
       </div>
       <Projects />
       
-      {/* Improved footer */}
-      <footer className='p-4 text-center' style={{
-        background: "linear-gradient(135deg, #2c2c2c, #000)",
-        position: "relative",
-        overflow: "hidden"
+      {/* Elegant footer */}
+      <footer className='text-center' style={{
+        padding: '40px 20px',
+        marginTop: '80px',
+        borderTop: '1px solid rgba(0, 0, 0, 0.08)',
+        position: 'relative',
+        zIndex: 1
       }}>
-        {/* Add cool background pattern to footer */}
-        <div style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
-          opacity: 0.2,
-          zIndex: 0
-        }}></div>
-        
-        <div className="container" style={{ position: "relative", zIndex: 1 }}>
-          <div className="row">
-            <div className="col-12 mb-3">
-              <p style={{ color: "#000000", fontFamily: "RedHatDisplay-Medium", fontSize: "1.2rem" }}>Let's connect!</p>
-            </div>
-            <div className="col-12 social-links">
-              <a href='https://github.com/faustogenga' className='btn btn-outline-light mx-2' target='_blank'>
-                <FontAwesomeIcon icon={faGithub} /> GitHub
-              </a>
-              <a href='https://www.linkedin.com/in/fausto-genga-695b68251/' className='btn btn-outline-light mx-2' target='_blank'>
-                <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
-              </a>
-              <a href='mailto:faustogengaalfaro@gmail.com' className='btn btn-outline-light mx-2'>
-                ✉️ Email
-              </a>
-            </div>
-            <div className="col-12 mt-3">
-              <p style={{ color: "#000000", fontFamily: "RedHatDisplay-Regular", fontSize: "0.9rem" }}>
-                © {new Date().getFullYear()} Fausto Genga. All rights reserved.
-              </p>
-            </div>
-          </div>
-        </div>
+        <p style={{ 
+          color: "#9ca3af", 
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "RedHatDisplay-Regular", sans-serif', 
+          fontSize: "0.85rem", 
+          margin: 0,
+          letterSpacing: '0.3px'
+        }}>
+          © {new Date().getFullYear()} Fausto Genga
+        </p>
       </footer>
       
-      {/* Add a "back to top" button */}
-      <button 
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          right: "20px",
-          width: "50px",
-          height: "50px",
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, #8398FC, #6C7FE3)",
-          color: "#000000",
-          border: "none",
-          boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-          zIndex: 1000,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "20px",
-          cursor: "pointer",
-          transition: "all 0.3s ease"
-        }}
-        onMouseOver={(e) => {
-          e.currentTarget.style.transform = "translateY(-5px)";
-          e.currentTarget.style.boxShadow = "0 8px 15px rgba(0,0,0,0.3)";
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
-        }}
-      >
-        <FontAwesomeIcon icon={faArrowUp} />
-      </button>
     </div>
   );
 };

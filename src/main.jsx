@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import Home from './home'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Enhanced.css';
+import './styles/Enhanced.css';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
