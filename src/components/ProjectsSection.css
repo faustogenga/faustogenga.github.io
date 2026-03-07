@@ -1,0 +1,217 @@
+/* ============================================================
+   PROJECTS SECTION
+   ============================================================ */
+
+.projects-section {
+  padding: 130px 0 110px;
+  background: var(--bg);
+}
+
+.projects-header {
+  margin-bottom: 56px;
+}
+
+.projects-heading {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--fg);
+  margin-top: 16px;
+  line-height: 1;
+}
+
+/* --- List container --- */
+.projects-list {
+  border-top: 1px solid var(--border);
+}
+
+/* --- Individual project row --- */
+.project-row {
+  position: relative;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s var(--ease);
+}
+
+.project-row:hover {
+  background: rgba(206, 255, 94, 0.02);
+}
+
+.project-row-link {
+  display: block;
+  padding: 30px 0;
+}
+
+.project-row-inner {
+  display: grid;
+  grid-template-columns: 56px 1fr auto auto auto;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Number */
+.project-row-num {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* Title */
+.project-row-title {
+  font-size: clamp(1.05rem, 2.5vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--fg);
+  transition: color 0.3s var(--ease);
+  line-height: 1.1;
+}
+
+.project-row:hover .project-row-title {
+  color: var(--accent);
+}
+
+/* Tags */
+.project-row-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+.project-row-tag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  border: 1px solid var(--border);
+  padding: 4px 11px;
+  border-radius: 99px;
+  white-space: nowrap;
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+
+.project-row:hover .project-row-tag {
+  color: rgba(206, 255, 94, 0.8);
+  border-color: rgba(206, 255, 94, 0.25);
+}
+
+/* Year */
+.project-row-year {
+  font-size: 0.72rem;
+  color: var(--fg-subtle);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Actions */
+.project-row-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.project-action-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  color: var(--fg-muted);
+  transition: all 0.25s var(--ease);
+  flex-shrink: 0;
+}
+
+.project-action-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* --- Hover image preview --- */
+.project-hover-img {
+  position: absolute;
+  /* vertically centered, offset to the right of tags area */
+  top: 50%;
+  right: 220px;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 190px;
+  border-radius: 10px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 20;
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.65), 0 0 0 1px var(--border);
+  will-change: transform, opacity;
+}
+
+.project-hover-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- Footer CTA --- */
+.projects-footer {
+  margin-top: 72px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.projects-footer-text {
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  letter-spacing: 0.06em;
+}
+
+.projects-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  transition: all 0.25s var(--ease);
+}
+
+.projects-github-link:hover {
+  color: var(--bg);
+  background: var(--fg);
+  border-color: var(--fg);
+}
+
+/* --- Responsive --- */
+@media (max-width: 960px) {
+  .project-hover-img { display: none; }
+  .project-row-tags  { display: none; }
+
+  .project-row-inner {
+    grid-template-columns: 48px 1fr auto auto;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .projects-section { padding: 80px 0; }
+
+  .project-row-inner {
+    grid-template-columns: 40px 1fr auto;
+    gap: 12px;
+  }
+
+  .project-row-year { display: none; }
+  .project-row-link { padding: 24px 0; }
+}
