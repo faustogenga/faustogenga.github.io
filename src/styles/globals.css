@@ -1,0 +1,151 @@
+/* ============================================================
+   GLOBALS — Dark Editorial Design System
+   ============================================================ */
+
+/* --- Reset --- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* --- Custom Properties --- */
+:root {
+  /* Colors */
+  --bg: #0A0A0A;
+  --surface: #141414;
+  --fg: #F0EDE6;
+  --fg-muted: rgba(240, 237, 230, 0.45);
+  --fg-subtle: rgba(240, 237, 230, 0.2);
+  --accent: #CEFF5E;
+  --accent-dim: rgba(206, 255, 94, 0.12);
+  --border: rgba(240, 237, 230, 0.08);
+  --border-hover: rgba(240, 237, 230, 0.18);
+
+  /* Typography */
+  --font-sans: 'Red Hat Display', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  /* Motion */
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.64, 0, 0.78, 0);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- Base --- */
+html {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: none;
+  overflow-x: hidden;
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+body {
+  background: var(--bg);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* On touch devices, restore default cursor */
+@media (pointer: coarse) {
+  html { cursor: auto; }
+  a, button { cursor: pointer; }
+}
+
+/* --- Typography resets --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--fg);
+  letter-spacing: -0.03em;
+}
+
+p {
+  line-height: 1.75;
+  color: var(--fg-muted);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: none;
+}
+
+button {
+  cursor: none;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* --- Custom scrollbar --- */
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--fg-muted); }
+
+/* --- Layout utility --- */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+@media (max-width: 768px) {
+  .section-container { padding: 0 24px; }
+}
+
+/* --- Section label --- */
+.section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* --- Section divider --- */
+.section-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 80px;
+}
+
+/* --- Footer --- */
+.site-footer {
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-copy,
+.footer-tagline {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
