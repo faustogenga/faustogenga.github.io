@@ -1,0 +1,24 @@
+.image-alphabet {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  gap: clamp(4px, 0.55vw, 10px);
+}
+
+.image-alphabet-glyph {
+  display: block;
+  height: clamp(70px, 10vw, 144px);
+  width: auto;
+  object-fit: contain;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 14px 34px rgba(0, 0, 0, 0.24));
+}
+
+.image-alphabet-space {
+  width: clamp(16px, 2vw, 32px);
+  flex: 0 0 auto;
+}
+
+.image-alphabet-fallback {
+  color: var(--fg);
+}

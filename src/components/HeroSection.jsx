@@ -3,19 +3,8 @@ import { gsap } from 'gsap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faDownload, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import ImageAlphabetText from './ImageAlphabetText'
 import './HeroSection.css'
-
-function splitToChars(el, text) {
-  el.innerHTML = text
-    .split('')
-    .map((c) =>
-      c === ' '
-        ? `<span class="char" style="display:inline-block;">&nbsp;</span>`
-        : `<span class="char" style="display:inline-block;">${c}</span>`
-    )
-    .join('')
-  return el.querySelectorAll('.char')
-}
 
 export default function HeroSection() {
   const heroRef   = useRef()
@@ -28,8 +17,8 @@ export default function HeroSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const chars1 = splitToChars(row1Ref.current, 'Fausto')
-      const chars2 = splitToChars(row2Ref.current, 'Genga')
+      const chars1 = row1Ref.current?.querySelectorAll('.image-alphabet-glyph')
+      const chars2 = row2Ref.current?.querySelectorAll('.image-alphabet-glyph')
 
       gsap.set(bottomRef.current, { opacity: 0, y: 24 })
       gsap.set(scrollRef.current, { opacity: 0 })
@@ -86,10 +75,14 @@ export default function HeroSection() {
         <div className="hero-name-block">
           <h1 className="hero-name" aria-label="Fausto Genga">
             <span className="hero-name-row">
-              <span className="hero-name-row-inner" ref={row1Ref} />
+              <span className="hero-name-row-inner hero-name-image-row" ref={row1Ref}>
+                <ImageAlphabetText text="Fausto" styles={['style-3']} />
+              </span>
             </span>
             <span className="hero-name-row hero-name-second">
-              <span className="hero-name-row-inner" ref={row2Ref} />
+              <span className="hero-name-row-inner hero-name-image-row" ref={row2Ref}>
+                <ImageAlphabetText text="Genga" styles={['style-3']} />
+              </span>
             </span>
           </h1>
         </div>
