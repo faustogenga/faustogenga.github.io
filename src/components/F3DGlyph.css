@@ -1,0 +1,32 @@
+.f3d-glyph {
+  display: inline-block;
+  height: clamp(76px, 10.8vw, 156px);
+  width: clamp(60px, 8.5vw, 124px);
+  cursor: grab;
+  vertical-align: bottom;
+  position: relative;
+}
+
+.f3d-glyph:active {
+  cursor: grabbing;
+}
+
+.f3d-glyph canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .f3d-glyph {
+    height: clamp(64px, 12vw, 118px);
+    width: clamp(50px, 10vw, 95px);
+  }
+}
+
+@media (max-width: 480px) {
+  .f3d-glyph {
+    height: clamp(42px, 12vw, 76px);
+    width: clamp(33px, 10vw, 62px);
+  }
+}

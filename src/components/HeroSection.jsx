@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faDownload, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import ImageAlphabetText from './ImageAlphabetText'
+import F3DGlyph from './F3DGlyph'
 import './HeroSection.css'
 
 export default function HeroSection() {
@@ -76,7 +77,9 @@ export default function HeroSection() {
           <h1 className="hero-name" aria-label="Fausto Genga">
             <span className="hero-name-row">
               <span className="hero-name-row-inner hero-name-image-row" ref={row1Ref}>
-                <ImageAlphabetText text="Fausto" styles={['style-3']} />
+                <F3DGlyph />
+                <F3DGlyph />
+                <ImageAlphabetText text="austo" styles={['style-3']} />
               </span>
             </span>
             <span className="hero-name-row hero-name-second">
