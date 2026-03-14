@@ -40,6 +40,38 @@
   color: var(--fg-muted);
 }
 
+.about-text strong {
+  color: var(--fg);
+  font-weight: 700;
+}
+
+.about-greeting {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.about-location {
+  line-height: 2.05;
+}
+
+.about-country {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fg);
+  font-weight: 600;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.about-country-flag {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 /* --- Stats bar --- */
 .about-stats {
   display: grid;

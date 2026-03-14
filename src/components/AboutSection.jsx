@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger)
 const stats = [
   { value: '5+',  label: 'Projects built' },
   { value: 'MSc', label: 'CS with AI focus' },
-  { value: '2',   label: 'Languages spoken' },
+  { value: '3',   label: 'Countries connected' },
 ]
 
 const skills = [
@@ -86,19 +86,41 @@ export default function AboutSection() {
           </h2>
 
           <div className="about-text" ref={textRef}>
-            <p>
-              I&apos;m Fausto Genga — an Informatics Engineering graduate with
-              a passion for data, AI, and full-stack development. I love building
-              intuitive, engaging experiences with React.
+            <p className="about-greeting">
+              Hi there <span aria-hidden="true">👋</span>
             </p>
             <p>
-              Currently pursuing a Master&apos;s in Computer Science with a
-              specialization in AI. Driven by curiosity, creativity, and a love
-              for solving problems through technology.
+              My name is <strong>Fausto Genga</strong>.
+            </p>
+            <p className="about-location">
+              I&apos;m from{' '}
+              <span className="about-country">
+                <span className="about-country-flag" aria-hidden="true">🇨🇷</span>
+                Costa Rica
+              </span>{' '}
+              &{' '}
+              <span className="about-country">
+                <span className="about-country-flag" aria-hidden="true">🇦🇷</span>
+                Argentina
+              </span>, currently living in{' '}
+              <span className="about-country">
+                <span className="about-country-flag" aria-hidden="true">🇧🇪</span>
+                Belgium
+              </span>.
             </p>
             <p>
-              My multicultural background gives me fresh perspectives and helps
-              me thrive in team-oriented, innovative environments.
+              I&apos;m an Informatics Engineering graduate passionate about data,
+              AI, and full-stack development. I especially enjoy building
+              intuitive and engaging front-end experiences with React.
+              Currently doing a master&apos;s in Computer Science with a
+              specialization in AI.
+            </p>
+            <p>
+              I&apos;m driven by curiosity, creativity, and a love for solving
+              problems through technology. With strong communication skills,
+              adaptability, and a collaborative mindset, I thrive in
+              team-oriented, innovative environments. My multicultural
+              background helps me bring fresh perspectives to every project.
             </p>
           </div>
         </div>

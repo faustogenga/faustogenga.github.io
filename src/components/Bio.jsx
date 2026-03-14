@@ -4,6 +4,14 @@ export const Bio = () => {
     "Data Analysis", "SQL", "APIs",
     "MongoDB", "Node", "Python", "Jupyter", "PyTorch"
   ];
+  const countryStyle = {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    color: '#1a1a1a',
+    fontWeight: '600',
+    whiteSpace: 'nowrap'
+  };
 
   return (
     <div className="cool-bio-card" style={{ 
@@ -47,7 +55,42 @@ export const Bio = () => {
             fontSize: '1rem',
             color: '#4a5568'
           }}>
-            I&apos;m Fausto Genga, an Informatics Engineering graduate passionate about data, AI, and full-stack development. I especially enjoy building intuitive and engaging front-end experiences with React. Currently doing a master&apos;s in Computer Science with a specialization in AI.
+            My name is <strong>Fausto Genga</strong>.
+          </p>
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            gap: '0.6rem',
+            margin: '0 0 18px 0',
+            lineHeight: '1.8',
+            fontSize: '1rem',
+            color: '#4a5568'
+          }}>
+            <span>I&apos;m from</span>
+            <span style={countryStyle}>
+              <span aria-hidden="true">🇨🇷</span>
+              Costa Rica
+            </span>
+            <span>&</span>
+            <span style={countryStyle}>
+              <span aria-hidden="true">🇦🇷</span>
+              Argentina
+            </span>
+            <span>, currently living in</span>
+            <span style={countryStyle}>
+              <span aria-hidden="true">🇧🇪</span>
+              Belgium
+            </span>
+            <span>.</span>
+          </div>
+          <p style={{ 
+            margin: '0 0 18px 0',
+            lineHeight: '1.8',
+            fontSize: '1rem',
+            color: '#4a5568'
+          }}>
+            I&apos;m an Informatics Engineering graduate passionate about data, AI, and full-stack development. I especially enjoy building intuitive and engaging front-end experiences with React. Currently doing a master&apos;s in Computer Science with a specialization in AI.
           </p>
           <p style={{ 
             margin: '0',

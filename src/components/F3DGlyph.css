@@ -5,6 +5,10 @@
   cursor: grab;
   vertical-align: bottom;
   position: relative;
+  overflow: visible;
+  filter:
+    drop-shadow(0 19px 29px rgba(16, 28, 44, 0.125))
+    drop-shadow(0 0 13px rgba(214, 228, 248, 0.2));
 }
 
 .f3d-glyph:active {
