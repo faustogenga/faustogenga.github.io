@@ -36,16 +36,12 @@
   background: rgba(206, 255, 94, 0.02);
 }
 
-.project-row-link {
-  display: block;
-  padding: 30px 0;
-}
-
 .project-row-inner {
   display: grid;
-  grid-template-columns: 56px 1fr auto auto auto;
+  grid-template-columns: 56px minmax(0, 1.8fr) minmax(240px, 1fr) auto auto;
   gap: 24px;
-  align-items: center;
+  align-items: start;
+  padding: 30px 0;
 }
 
 /* Number */
@@ -59,6 +55,15 @@
 }
 
 /* Title */
+.project-row-copy {
+  min-width: 0;
+}
+
+.project-row-title-link {
+  display: inline-flex;
+  text-decoration: none;
+}
+
 .project-row-title {
   font-size: clamp(1.05rem, 2.5vw, 1.55rem);
   font-weight: 800;
@@ -72,12 +77,29 @@
   color: var(--accent);
 }
 
+.project-row-summary {
+  margin-top: 10px;
+  max-width: 62ch;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--fg-muted);
+}
+
+.project-row-note {
+  margin-top: 8px;
+  max-width: 62ch;
+  font-size: 0.76rem;
+  line-height: 1.65;
+  color: var(--fg-subtle);
+}
+
 /* Tags */
 .project-row-tags {
   display: flex;
   gap: 6px;
-  flex-wrap: nowrap;
-  justify-content: flex-end;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-self: center;
 }
 
 .project-row-tag {
@@ -99,12 +121,12 @@
 }
 
 /* Year */
-.project-row-year {
+.project-row-meta {
   font-size: 0.72rem;
   color: var(--fg-subtle);
-  font-variant-numeric: tabular-nums;
   font-weight: 600;
   white-space: nowrap;
+  align-self: center;
 }
 
 /* Actions */
@@ -112,6 +134,7 @@
   display: flex;
   gap: 6px;
   align-items: center;
+  align-self: center;
 }
 
 .project-action-btn {
@@ -137,9 +160,8 @@
 /* --- Hover image preview --- */
 .project-hover-img {
   position: absolute;
-  /* vertically centered, offset to the right of tags area */
   top: 50%;
-  right: 220px;
+  right: 150px;
   transform: translateY(-50%);
   width: 300px;
   height: 190px;
@@ -212,6 +234,13 @@
     gap: 12px;
   }
 
-  .project-row-year { display: none; }
-  .project-row-link { padding: 24px 0; }
+  .project-row-meta { display: none; }
+  .project-row-inner { padding: 24px 0; }
+  .project-row-summary {
+    font-size: 0.88rem;
+    line-height: 1.62;
+  }
+  .project-row-note {
+    font-size: 0.74rem;
+  }
 }

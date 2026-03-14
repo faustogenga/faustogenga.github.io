@@ -1,9 +1,6 @@
+import { portfolioSkills } from '../data/portfolio'
+
 export const OldBio = () => {
-  const skills = [
-    "React", "JavaScript", "HTML/CSS", "Power BI",
-    "Data Analysis", "SQL", "APIs",
-    "MongoDB", "Node", "Python", "Jupyter", "PyTorch"
-  ];
   const countryStyle = {
     display: 'inline-flex',
     alignItems: 'center',
@@ -84,7 +81,7 @@ export const OldBio = () => {
         borderTop: '1px solid rgba(0, 0, 0, 0.06)'
       }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '0.7rem' }}>
-          {skills.map((skill, index) => (
+          {portfolioSkills.map((skill, index) => (
             <span
               key={index}
               className="cool-pill-grid"

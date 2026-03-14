@@ -2,19 +2,14 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import './AboutSection.css'
+import { portfolioProjects, portfolioSkills } from '../data/portfolio'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const stats = [
-  { value: '5+',  label: 'Projects built' },
+  { value: `${portfolioProjects.length}+`, label: 'Projects shipped' },
   { value: 'MSc', label: 'CS with AI focus' },
-  { value: '3',   label: 'Countries connected' },
-]
-
-const skills = [
-  'React', 'JavaScript', 'TypeScript', 'Python', 'SQL',
-  'Node.js', 'MongoDB', 'FastAPI', 'PyTorch', 'C#',
-  'ASP.NET', 'Firebase', 'Power BI', 'Git',
+  { value: '3', label: 'Client platforms live' },
 ]
 
 export default function AboutSection() {
@@ -137,7 +132,7 @@ export default function AboutSection() {
         <div className="about-skills">
           <p className="about-skills-title">Tech stack</p>
           <div className="about-skills-grid" ref={skillsRef}>
-            {skills.map((s) => (
+            {portfolioSkills.map((s) => (
               <span key={s} className="about-skill-tag">{s}</span>
             ))}
           </div>

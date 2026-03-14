@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -5,53 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import './ProjectsSection.css'
+import { portfolioProjects } from '../data/portfolio'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const projects = [
-  {
-    num: '01',
-    title: 'Animal Image Classification',
-    year: '2024',
-    tags: ['Python', 'PyTorch', 'ML'],
-    cover: '/animal-classification.png',
-    github: 'https://github.com/faustogenga/VUB-Machine-Learning-project-Animal-Classification',
-  },
-  {
-    num: '02',
-    title: 'AI PDF Inquire',
-    year: '2024',
-    tags: ['React', 'FastAPI', 'RAG'],
-    cover: '/ai-pdf-inquire.jpg',
-    github: 'https://github.com/faustogenga/AI-PDFInquire',
-  },
-  {
-    num: '03',
-    title: 'FutStore CR',
-    year: '2023',
-    tags: ['React', 'Firebase'],
-    cover: '/futstore-cr.jpg',
-    github: 'https://github.com/faustogenga/Fut-Store-CR',
-    live: 'https://crfutstore.web.app/',
-  },
-  {
-    num: '04',
-    title: 'ULACIT Parking Service',
-    year: '2023',
-    tags: ['JavaScript', 'PHP', 'SQL'],
-    cover: '/ulacit-parking.jpg',
-    github: 'https://github.com/faustogenga/ULACIT-Parking-Service',
-    live: 'https://ulacitparking.netlify.app/',
-  },
-  {
-    num: '05',
-    title: 'College Registration API',
-    year: '2022',
-    tags: ['ASP.NET', 'C#', 'SQL'],
-    cover: '/college-registration-api.jpg',
-    github: 'https://github.com/faustogenga/WebAPIMatricula_1C2023',
-  },
-]
 
 function ProjectRow({ project, index }) {
   const rowRef = useRef()
@@ -85,47 +42,55 @@ function ProjectRow({ project, index }) {
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
     >
-      <a
-        href={project.live || project.github}
-        target="_blank"
-        rel="noreferrer"
-        className="project-row-link"
-      >
-        <div className="project-row-inner">
-          <span className="project-row-num">{project.num}</span>
-          <h3 className="project-row-title">{project.title}</h3>
-          <div className="project-row-tags">
-            {project.tags.map((tag) => (
-              <span key={tag} className="project-row-tag">{tag}</span>
-            ))}
-          </div>
-          <span className="project-row-year">{project.year}</span>
-          <div className="project-row-actions">
-            {project.live && (
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noreferrer"
-                className="project-action-btn"
-                onClick={(e) => e.stopPropagation()}
-                aria-label={`${project.title} live demo`}
-              >
-                <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-              </a>
-            )}
+      <div className="project-row-inner">
+        <span className="project-row-num">{project.num}</span>
+
+        <div className="project-row-copy">
+          <a
+            href={project.live || project.github}
+            target="_blank"
+            rel="noreferrer"
+            className="project-row-title-link"
+          >
+            <h3 className="project-row-title">{project.title}</h3>
+          </a>
+          <p className="project-row-summary">{project.summary}</p>
+          <p className="project-row-note">{project.note}</p>
+        </div>
+
+        <div className="project-row-tags">
+          {project.tags.map((tag) => (
+            <span key={tag} className="project-row-tag">{tag}</span>
+          ))}
+        </div>
+
+        <span className="project-row-meta">{project.meta}</span>
+
+        <div className="project-row-actions">
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noreferrer"
+              className="project-action-btn"
+              aria-label={`${project.title} live demo`}
+            >
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
+          )}
+          {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noreferrer"
               className="project-action-btn"
-              onClick={(e) => e.stopPropagation()}
               aria-label={`${project.title} GitHub`}
             >
               <FontAwesomeIcon icon={faGithub} />
             </a>
-          </div>
+          )}
         </div>
-      </a>
+      </div>
 
       {/* Hover image */}
       <div ref={imgRef} className="project-hover-img" aria-hidden="true">
@@ -170,13 +135,13 @@ export default function ProjectsSection() {
         </div>
 
         <div className="projects-list">
-          {projects.map((project, i) => (
+          {portfolioProjects.map((project, i) => (
             <ProjectRow key={project.num} project={project} index={i} />
           ))}
         </div>
 
         <div className="projects-footer" ref={footerRef}>
-          <span className="projects-footer-text">More on GitHub</span>
+          <span className="projects-footer-text">More open-source work on GitHub</span>
           <a
             href="https://github.com/faustogenga"
             target="_blank"

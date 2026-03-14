@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useMemo, useRef } from 'react'
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, Lightformer, OrbitControls, useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
@@ -142,6 +142,20 @@ function FModel({ cursorRef }) {
 export default function F3DGlyph({ className = '' }) {
   const glyphRef = useRef()
   const cursorRef = useRef({ x: 0, y: 0 })
+  const [webglSupported, setWebglSupported] = useState(false)
+
+  useEffect(() => {
+    try {
+      const canvas = document.createElement('canvas')
+      const context =
+        canvas.getContext('webgl') ||
+        canvas.getContext('experimental-webgl')
+
+      setWebglSupported(Boolean(context))
+    } catch {
+      setWebglSupported(false)
+    }
+  }, [])
 
   useEffect(() => {
     function handlePointerMove(event) {
@@ -170,6 +184,18 @@ export default function F3DGlyph({ className = '' }) {
       window.removeEventListener('pointerleave', resetPointer)
     }
   }, [])
+
+  if (!webglSupported) {
+    return (
+      <span
+        ref={glyphRef}
+        className={`f3d-glyph f3d-glyph-fallback image-alphabet-glyph ${className}`.trim()}
+        aria-hidden="true"
+      >
+        <span className="f3d-glyph-fallback-letter">F</span>
+      </span>
+    )
+  }
 
   return (
     <span
