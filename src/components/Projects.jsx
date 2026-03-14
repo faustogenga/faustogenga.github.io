@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments, faFutbol, faExternalLinkAlt, faServer, faBrain, faGlobe, faStethoscope, faMotorcycle, faTableTennisPaddleBall } from '@fortawesome/free-solid-svg-icons';
+import { faComments, faFutbol, faExternalLinkAlt, faServer, faBrain, faGlobe, faStethoscope, faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { portfolioProjects } from '../data/portfolio';
 
@@ -10,7 +10,6 @@ const iconMap = {
   external: faExternalLinkAlt,
   server: faServer,
   globe: faGlobe,
-  padel: faTableTennisPaddleBall,
   stethoscope: faStethoscope,
   motorcycle: faMotorcycle,
 };
@@ -23,7 +22,9 @@ export const Projects = () => {
           <div className="project-media">
             <img src={project.cover} alt={`${project.title} preview`} loading="lazy" />
             <div className="project-icon">
-              <FontAwesomeIcon icon={iconMap[project.iconKey]} />
+              {iconMap[project.iconKey]
+                ? <FontAwesomeIcon icon={iconMap[project.iconKey]} />
+                : <span style={{ fontSize: '1.1rem', lineHeight: 1 }}>{project.iconKey}</span>}
             </div>
           </div>
 

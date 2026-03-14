@@ -35,7 +35,7 @@ export const portfolioProjects = [
     num: '02',
     title: 'The Net',
     meta: 'Client work',
-    iconKey: 'tennis',
+    iconKey: 'globe',
     cover: '/project-covers/the-net.png',
     summary:
       'Contributed to the development of a global padel marketplace that connects coaches with clubs, making it easier to discover international opportunities and hire top-tier talent.',

@@ -22,7 +22,9 @@ export const Projects = () => {
           <div className="project-media">
             <img src={project.cover} alt={`${project.title} preview`} loading="lazy" />
             <div className="project-icon">
-              <FontAwesomeIcon icon={iconMap[project.iconKey]} />
+              {iconMap[project.iconKey]
+                ? <FontAwesomeIcon icon={iconMap[project.iconKey]} />
+                : <span style={{ fontSize: '1.1rem', lineHeight: 1 }}>{project.iconKey}</span>}
             </div>
           </div>
 

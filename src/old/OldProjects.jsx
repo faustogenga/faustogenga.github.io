@@ -10,7 +10,7 @@ const iconMap = {
   external: faExternalLinkAlt,
   server: faServer,
   globe: faGlobe,
-  padel: faTableTennisPaddleBall,
+  tennis: faTableTennisPaddleBall,
   stethoscope: faStethoscope,
   motorcycle: faMotorcycle,
 };
