@@ -1,6 +1,3 @@
-import './styles/Fonts.css'
-import './styles/globals.css'
-
 import { useLenis } from './hooks/useLenis'
 import CustomCursor    from './components/CustomCursor'
 import NoiseOverlay    from './components/NoiseOverlay'

@@ -1,0 +1,30 @@
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: #000;
+  pointer-events: none;
+  animation: page-loader-exit 0.55s ease 1.35s forwards;
+}
+
+.page-loader__inner {
+  width: min(180px, calc(100vw - 72px));
+  display: grid;
+  justify-items: center;
+}
+
+.page-loader__moon {
+  width: clamp(60px, 10vw, 88px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  opacity: 1;
+}
+
+@keyframes page-loader-exit {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

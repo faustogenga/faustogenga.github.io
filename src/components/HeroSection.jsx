@@ -4,7 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faDownload, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { Parallax } from 'react-scroll-parallax'
+import HeroCosmosCanvas from './HeroCosmosCanvas'
 import F3DGlyph, { A3DGlyph } from './F3DGlyph'
+import HeroWordmark from './HeroWordmark'
 import './HeroSection.css'
 
 export default function HeroSection() {
@@ -68,6 +70,10 @@ export default function HeroSection() {
 
   return (
     <section className="hero" ref={heroRef}>
+      <div className="hero-cosmos" aria-hidden="true">
+        <HeroCosmosCanvas heroRef={heroRef} attractorRef={monogramRef} />
+      </div>
+
       <div className="hero-inner">
 
         {/* Top row */}
@@ -83,18 +89,19 @@ export default function HeroSection() {
 
         {/* Name */}
         <div className="hero-name-block">
-          <h1 className="hero-name hero-name-single" aria-label="Fausto Genga">
-            <span className="hero-name-row">
+          <div className="hero-name hero-name-single" aria-label="Fausto Genga">
+            <div className="hero-name-row">
               <Parallax speed={-8} className="hero-monogram-parallax">
                 <span className="hero-monogram" ref={monogramRef}>
                   <F3DGlyph className="hero-f-glyph" />
                   <A3DGlyph className="hero-f-glyph hero-a-glyph" />
                 </span>
               </Parallax>
-              <span className="hero-last-name">Genga</span>
-            </span>
-          </h1>
+            </div>
+          </div>
         </div>
+
+        <HeroWordmark />
 
         {/* Bottom bar */}
         <div className="hero-bottom" ref={bottomRef}>
