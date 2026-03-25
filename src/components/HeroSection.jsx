@@ -5,7 +5,7 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faDownload, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { Parallax } from 'react-scroll-parallax'
 import HeroCosmosCanvas from './HeroCosmosCanvas'
-import F3DGlyph, { A3DGlyph } from './F3DGlyph'
+import F3DGlyph, { A3DGlyph, S3DGlyph } from './F3DGlyph'
 import HeroWordmark from './HeroWordmark'
 import './HeroSection.css'
 
@@ -95,6 +95,7 @@ export default function HeroSection() {
                 <span className="hero-monogram" ref={monogramRef}>
                   <F3DGlyph className="hero-f-glyph" />
                   <A3DGlyph className="hero-f-glyph hero-a-glyph" />
+                  <S3DGlyph className="hero-f-glyph hero-s-glyph" />
                 </span>
               </Parallax>
             </div>
