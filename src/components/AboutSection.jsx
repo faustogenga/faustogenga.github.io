@@ -1,16 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Parallax } from 'react-scroll-parallax'
 import './AboutSection.css'
-import { portfolioProjects, portfolioSkills } from '../data/portfolio'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const stats = [
-  { value: `${portfolioProjects.length}+`, label: 'Projects shipped' },
-  { value: 'MSc', label: 'CS with AI focus' },
-  { value: '3', label: 'Client platforms live' },
-]
 
 export default function AboutSection() {
   const sectionRef = useRef()
@@ -18,8 +12,6 @@ export default function AboutSection() {
   const dividerRef = useRef()
   const headingRef = useRef()
   const textRef    = useRef()
-  const statsRef   = useRef()
-  const skillsRef  = useRef()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -44,24 +36,6 @@ export default function AboutSection() {
         ease: 'expo.out',
         scrollTrigger: { trigger: textRef.current, start: 'top 85%' },
       })
-
-      gsap.from(Array.from(statsRef.current.children), {
-        opacity: 0,
-        y: 40,
-        stagger: 0.1,
-        duration: 0.85,
-        ease: 'expo.out',
-        scrollTrigger: { trigger: statsRef.current, start: 'top 85%' },
-      })
-
-      gsap.from(Array.from(skillsRef.current.children), {
-        opacity: 0,
-        scale: 0.85,
-        stagger: 0.035,
-        duration: 0.6,
-        ease: 'expo.out',
-        scrollTrigger: { trigger: skillsRef.current, start: 'top 88%' },
-      })
     }, sectionRef)
 
     return () => ctx.revert()
@@ -75,20 +49,30 @@ export default function AboutSection() {
         <div className="section-divider" ref={dividerRef} style={{ marginBottom: 0 }} />
 
         <div className="about-grid">
-          <h2 className="about-heading" ref={headingRef}>
-            Building things<br />
-            <span className="about-heading-accent">that matter.</span>
-          </h2>
+          <div className="about-heading-block" ref={headingRef}>
+            <Parallax speed={-4} className="about-heading-parallax">
+              <h2 className="about-heading">
+                Building things<br />
+                <span className="about-heading-accent">that matter.</span>
+              </h2>
+              <p className="about-heading-note">
+                I care about products that feel clear, useful, and quietly memorable.
+              </p>
+            </Parallax>
+          </div>
 
           <div className="about-text" ref={textRef}>
-            <p className="about-greeting">
-              Hi there <span aria-hidden="true">👋</span>
+            <div className="about-meta-pills">
+              <span className="about-meta-pill about-meta-pill-greeting">
+                <span className="about-meta-pill-emoji" aria-hidden="true">👋</span>
+                <span>Hi there</span>
+              </span>
+            </div>
+            <p className="about-lead">
+              Product-minded engineer focused on thoughtful interfaces, useful systems, and clean execution.
             </p>
-            <p>
-              My name is <strong>Fausto Genga</strong>.
-            </p>
-            <p className="about-location">
-              I&apos;m from{' '}
+            <p className="about-body about-location">
+              I&apos;m originally from{' '}
               <span className="about-country">
                 <span className="about-country-flag" aria-hidden="true">🇨🇷</span>
                 Costa Rica
@@ -103,41 +87,18 @@ export default function AboutSection() {
                 Belgium
               </span>.
             </p>
-            <p>
-              I&apos;m an Informatics Engineering graduate passionate about data,
-              AI, and full-stack development. I especially enjoy building
-              intuitive and engaging front-end experiences with React.
-              Currently doing a master&apos;s in Computer Science with a
-              specialization in AI.
+            <p className="about-body">
+              I&apos;m an Informatics Engineering graduate working across data, AI, and full-stack development,
+              with a strong preference for intuitive front-end experiences built with React. I&apos;m currently
+              pursuing a master&apos;s in Computer Science with a specialization in AI.
             </p>
-            <p>
-              I&apos;m driven by curiosity, creativity, and a love for solving
-              problems through technology. With strong communication skills,
-              adaptability, and a collaborative mindset, I thrive in
-              team-oriented, innovative environments. My multicultural
-              background helps me bring fresh perspectives to every project.
+            <p className="about-body">
+              I&apos;m driven by curiosity, adaptability, and a love for solving practical problems through
+              technology. A multicultural background and collaborative mindset help me bring fresh
+              perspective to every project.
             </p>
           </div>
         </div>
-
-        <div className="about-stats" ref={statsRef}>
-          {stats.map(({ value, label }) => (
-            <div className="about-stat" key={label}>
-              <div className="about-stat-value">{value}</div>
-              <div className="about-stat-label">{label}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="about-skills">
-          <p className="about-skills-title">Tech stack</p>
-          <div className="about-skills-grid" ref={skillsRef}>
-            {portfolioSkills.map((s) => (
-              <span key={s} className="about-skill-tag">{s}</span>
-            ))}
-          </div>
-        </div>
-
       </div>
     </section>
   )

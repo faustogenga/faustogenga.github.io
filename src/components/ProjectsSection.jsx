@@ -3,121 +3,131 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Parallax } from 'react-scroll-parallax'
+import {
+  faArrowUpRightFromSquare,
+} from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
 import './ProjectsSection.css'
 import { portfolioProjects } from '../data/portfolio'
 
 gsap.registerPlugin(ScrollTrigger)
 
-function ProjectRow({ project, index }) {
-  const rowRef = useRef()
-  const imgRef = useRef()
+function ProjectActions({ project, compact = false }) {
+  return (
+    <div className={`project-card-actions${compact ? ' compact' : ''}`}>
+      {project.live && (
+        <a
+          href={project.live}
+          target="_blank"
+          rel="noreferrer"
+          className="project-action-link primary"
+        >
+          View live <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+        </a>
+      )}
+      {project.github && (
+        <a
+          href={project.github}
+          target="_blank"
+          rel="noreferrer"
+          className="project-action-link"
+        >
+          <FontAwesomeIcon icon={faGithub} /> GitHub
+        </a>
+      )}
+    </div>
+  )
+}
+
+function FeaturedProject({ project, index = 0 }) {
+  const featureRef = useRef()
+  const tintVariants = [
+    { glow: '150 208 255', accent: '108 196 255' },
+    { glow: '124 197 255', accent: '85 168 255' },
+    { glow: '116 226 255', accent: '84 194 255' },
+    { glow: '171 201 255', accent: '124 168 255' },
+  ]
+  const tint = tintVariants[index % tintVariants.length]
+  const imageSpeed = index % 2 === 0 ? -6 : 6
 
   useEffect(() => {
-    gsap.from(rowRef.current, {
-      y: 50,
-      opacity: 0,
-      duration: 0.9,
-      ease: 'expo.out',
-      delay: index * 0.06,
-      scrollTrigger: { trigger: rowRef.current, start: 'top 88%' },
-    })
-
-    gsap.set(imgRef.current, { opacity: 0, scale: 0.92 })
+    const ctx = gsap.context(() => {
+      gsap.from(featureRef.current, {
+        opacity: 0,
+        y: 56,
+        duration: 1.1,
+        ease: 'expo.out',
+        delay: index * 0.05,
+        scrollTrigger: { trigger: featureRef.current, start: 'top 86%' },
+      })
+    }, featureRef)
+    return () => ctx.revert()
   }, [index])
-
-  const onEnter = () => {
-    gsap.to(imgRef.current, { opacity: 1, scale: 1, duration: 0.5, ease: 'expo.out' })
-  }
-
-  const onLeave = () => {
-    gsap.to(imgRef.current, { opacity: 0, scale: 0.92, duration: 0.35, ease: 'expo.out' })
-  }
 
   return (
     <article
-      ref={rowRef}
-      className="project-row"
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
+      ref={featureRef}
+      className="featured-project"
+      style={{
+        '--project-glow': tint.glow,
+        '--project-accent': tint.accent,
+      }}
     >
-      <div className="project-row-inner">
-        <span className="project-row-num">{project.num}</span>
-
-        <div className="project-row-copy">
-          <a
-            href={project.live || project.github}
-            target="_blank"
-            rel="noreferrer"
-            className="project-row-title-link"
-          >
-            <h3 className="project-row-title">{project.title}</h3>
-          </a>
-          <p className="project-row-summary">{project.summary}</p>
-          <p className="project-row-note">{project.note}</p>
+      <div className="featured-project-copy">
+        <div className="featured-project-kicker">
+          <span className="featured-project-label">Now building</span>
+          <span className="featured-project-number">{project.num}</span>
         </div>
 
-        <div className="project-row-tags">
+        <h3 className="featured-project-title">{project.title}</h3>
+        <p className="featured-project-summary">{project.summary}</p>
+        <p className="featured-project-note">{project.note}</p>
+
+        <div className="featured-project-tags">
           {project.tags.map((tag) => (
-            <span key={tag} className="project-row-tag">{tag}</span>
+            <span key={tag} className="featured-project-tag">{tag}</span>
           ))}
         </div>
 
-        <span className="project-row-meta">{project.meta}</span>
-
-        <div className="project-row-actions">
-          {project.live && (
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noreferrer"
-              className="project-action-btn"
-              aria-label={`${project.title} live demo`}
-            >
-              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-            </a>
-          )}
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noreferrer"
-              className="project-action-btn"
-              aria-label={`${project.title} GitHub`}
-            >
-              <FontAwesomeIcon icon={faGithub} />
-            </a>
-          )}
-        </div>
+        <ProjectActions project={project} />
       </div>
 
-      {/* Hover image */}
-      <div ref={imgRef} className="project-hover-img" aria-hidden="true">
-        <img src={project.cover} alt="" />
+      <div className="featured-project-visual">
+        <div className="featured-project-orb" />
+        <Parallax speed={imageSpeed} className="featured-project-shot-parallax">
+          <div className="featured-project-shot">
+            <img src={project.cover} alt={`${project.title} showcase`} loading="lazy" />
+          </div>
+        </Parallax>
       </div>
     </article>
   )
 }
 
 export default function ProjectsSection() {
-  const sectionRef  = useRef()
-  const labelRef    = useRef()
-  const headingRef  = useRef()
-  const footerRef   = useRef()
+  const sectionRef = useRef()
+  const labelRef = useRef()
+  const headingRef = useRef()
+  const introRef = useRef()
+  const footerRef = useRef()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(labelRef.current, {
-        opacity: 0, y: 20, duration: 0.8, ease: 'expo.out',
-        scrollTrigger: { trigger: labelRef.current, start: 'top 88%' },
+      gsap.from([labelRef.current, headingRef.current, introRef.current], {
+        opacity: 0,
+        y: 34,
+        duration: 0.95,
+        stagger: 0.08,
+        ease: 'expo.out',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 82%' },
       })
-      gsap.from(headingRef.current, {
-        opacity: 0, y: 50, duration: 1, ease: 'expo.out',
-        scrollTrigger: { trigger: headingRef.current, start: 'top 88%' },
-      })
+
       gsap.from(footerRef.current, {
-        opacity: 0, y: 30, duration: 0.8, ease: 'expo.out',
+        opacity: 0,
+        y: 24,
+        duration: 0.8,
+        ease: 'expo.out',
         scrollTrigger: { trigger: footerRef.current, start: 'top 90%' },
       })
     }, sectionRef)
@@ -128,20 +138,29 @@ export default function ProjectsSection() {
   return (
     <section className="projects-section" ref={sectionRef}>
       <div className="section-container">
-
         <div className="projects-header">
-          <span className="section-label" ref={labelRef}>Work</span>
-          <h2 className="projects-heading" ref={headingRef}>Selected projects</h2>
+          <div className="projects-heading-block">
+            <span className="section-label" ref={labelRef}>Work</span>
+            <h2 className="projects-heading" ref={headingRef}>
+              Selected projects
+              <span className="projects-heading-accent"> made for real people and real use.</span>
+            </h2>
+          </div>
+
+          <p className="projects-intro" ref={introRef}>
+            A mix of product work, client builds, and personal projects that show how I approach design,
+            development, and practical problem-solving.
+          </p>
         </div>
 
-        <div className="projects-list">
-          {portfolioProjects.map((project, i) => (
-            <ProjectRow key={project.num} project={project} index={i} />
+        <div className="projects-stack">
+          {portfolioProjects.map((project, index) => (
+            <FeaturedProject key={project.num} project={project} index={index} />
           ))}
         </div>
 
         <div className="projects-footer" ref={footerRef}>
-          <span className="projects-footer-text">More open-source work on GitHub</span>
+          <span className="projects-footer-text">More experiments, prototypes, and code in the full repository stream.</span>
           <a
             href="https://github.com/faustogenga"
             target="_blank"
@@ -152,7 +171,6 @@ export default function ProjectsSection() {
             faustogenga
           </a>
         </div>
-
       </div>
     </section>
   )

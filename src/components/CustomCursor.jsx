@@ -20,12 +20,12 @@ export default function CustomCursor() {
     }
 
     const onEnter = () => {
-      gsap.to(ring, { scale: 2.2, borderColor: 'rgba(206,255,94,0.3)', duration: 0.4, ease: 'expo.out' })
+      gsap.to(ring, { scale: 2.2, borderColor: 'rgba(140,200,255,0.34)', duration: 0.4, ease: 'expo.out' })
       gsap.to(dot, { scale: 0.3, duration: 0.3, ease: 'expo.out' })
     }
 
     const onLeave = () => {
-      gsap.to(ring, { scale: 1, borderColor: 'rgba(206,255,94,0.7)', duration: 0.4, ease: 'expo.out' })
+      gsap.to(ring, { scale: 1, borderColor: 'rgba(140,200,255,0.72)', duration: 0.4, ease: 'expo.out' })
       gsap.to(dot, { scale: 1, duration: 0.3, ease: 'expo.out' })
     }
 

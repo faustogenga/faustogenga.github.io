@@ -27,7 +27,7 @@ const Home = () => {
           <div className="section-container">
             <div className="footer-inner">
               <p className="footer-copy">© {new Date().getFullYear()} Fausto Genga</p>
-              <p className="footer-tagline">Informatics Engineer · Fullstack Developer</p>
+              <p className="footer-tagline">Web App Development · Informatics Engineer</p>
             </div>
           </div>
         </footer>

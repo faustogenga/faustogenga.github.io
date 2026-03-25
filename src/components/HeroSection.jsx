@@ -3,7 +3,8 @@ import { gsap } from 'gsap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faDownload, faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import F3DGlyph from './F3DGlyph'
+import { Parallax } from 'react-scroll-parallax'
+import F3DGlyph, { A3DGlyph } from './F3DGlyph'
 import './HeroSection.css'
 
 export default function HeroSection() {
@@ -73,7 +74,7 @@ export default function HeroSection() {
         <div className="hero-top">
           <div className="hero-badge" ref={badgeRef}>
             <span className="hero-badge-dot" />
-            Available for opportunities
+            Contact me for collaborations
           </div>
           <span className="hero-year" ref={yearRef}>
             {new Date().getFullYear()}
@@ -84,9 +85,13 @@ export default function HeroSection() {
         <div className="hero-name-block">
           <h1 className="hero-name hero-name-single" aria-label="Fausto Genga">
             <span className="hero-name-row">
-              <span className="hero-monogram" ref={monogramRef}>
-                <F3DGlyph className="hero-f-glyph" />
-              </span>
+              <Parallax speed={-8} className="hero-monogram-parallax">
+                <span className="hero-monogram" ref={monogramRef}>
+                  <F3DGlyph className="hero-f-glyph" />
+                  <A3DGlyph className="hero-f-glyph hero-a-glyph" />
+                </span>
+              </Parallax>
+              <span className="hero-last-name">Genga</span>
             </span>
           </h1>
         </div>
@@ -94,9 +99,12 @@ export default function HeroSection() {
         {/* Bottom bar */}
         <div className="hero-bottom" ref={bottomRef}>
           <div className="hero-role">
-            <span className="hero-role-item">Informatics Engineer</span>
-            <span className="hero-role-item">Fullstack Developer</span>
-            <span className="hero-role-item">AI · Data Enthusiast</span>
+            <span className="hero-role-kicker">Current focus</span>
+            <div className="hero-role-list">
+              <span className="hero-role-item">Web App Development</span>
+              <span className="hero-role-item">Informatics Engineer</span>
+              <span className="hero-role-item">AI · Data Enthusiast</span>
+            </div>
           </div>
 
           <nav className="hero-links" aria-label="Contact links">
@@ -104,7 +112,7 @@ export default function HeroSection() {
               href="https://github.com/faustogenga"
               target="_blank"
               rel="noreferrer"
-              className="hero-link-btn"
+              className="hero-link-btn hero-link-btn-accent hero-link-btn-github"
             >
               <FontAwesomeIcon icon={faGithub} /> GitHub
             </a>
@@ -112,20 +120,20 @@ export default function HeroSection() {
               href="https://www.linkedin.com/in/fausto-genga-695b68251/"
               target="_blank"
               rel="noreferrer"
-              className="hero-link-btn"
+              className="hero-link-btn hero-link-btn-accent hero-link-btn-linkedin"
             >
               <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
             </a>
             <a
               href="mailto:faustogengaalfaro@gmail.com"
-              className="hero-link-btn"
+              className="hero-link-btn hero-link-btn-accent hero-link-btn-email"
             >
               <FontAwesomeIcon icon={faEnvelope} /> Email
             </a>
             <a
               href="/Fausto_Genga_Resume.pdf"
               download
-              className="hero-link-btn accent"
+              className="hero-link-btn hero-link-btn-accent hero-link-btn-resume"
             >
               <FontAwesomeIcon icon={faDownload} /> Resume
             </a>

@@ -17,8 +17,8 @@
   --fg: #F0EDE6;
   --fg-muted: rgba(240, 237, 230, 0.45);
   --fg-subtle: rgba(240, 237, 230, 0.2);
-  --accent: #CEFF5E;
-  --accent-dim: rgba(206, 255, 94, 0.12);
+  --accent: #8cc8ff;
+  --accent-dim: rgba(140, 200, 255, 0.14);
   --border: rgba(240, 237, 230, 0.08);
   --border-hover: rgba(240, 237, 230, 0.18);
 
@@ -91,10 +91,13 @@ img {
 }
 
 /* --- Custom scrollbar --- */
-::-webkit-scrollbar { width: 2px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: var(--fg-muted); }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: rgba(10, 10, 10, 0.96); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #9fd5ff, #74bcff);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #b4e0ff, #87c8ff); }
 
 /* --- Layout utility --- */
 .section-container {
