@@ -6,7 +6,12 @@
   place-items: center;
   background: #000;
   pointer-events: none;
-  animation: page-loader-exit 0.55s ease 1.35s forwards;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+
+.page-loader--exiting {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .page-loader__inner {
@@ -22,9 +27,3 @@
   opacity: 1;
 }
 
-@keyframes page-loader-exit {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
