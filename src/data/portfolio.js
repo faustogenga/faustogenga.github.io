@@ -62,7 +62,7 @@ export const portfolioProjects = [
     title: 'Animal Image Classification',
     meta: '2024',
     iconKey: 'brain',
-    cover: '/animal-classification.png',
+    cover: '/project-covers/animal-classification.png',
     summary:
       'Image classification pipeline for 12 animal classes using deep learning with PyTorch and traditional ML approaches with feature extraction and classical classifiers.',
     note:
@@ -75,7 +75,7 @@ export const portfolioProjects = [
     title: 'AI PDF Inquire',
     meta: '2024',
     iconKey: 'comments',
-    cover: '/ai-pdf-inquire.jpg',
+    cover: '/project-covers/ai-pdf-inquire.jpg',
     summary:
       'Full-stack PDF assistant that lets users chat with documents, using a React frontend and FastAPI backend to keep answers grounded in uploaded files.',
     note:
@@ -88,7 +88,7 @@ export const portfolioProjects = [
     title: 'FutStore CR',
     meta: '2023',
     iconKey: 'futbol',
-    cover: '/futstore-cr.jpg',
+    cover: '/project-covers/futstore-cr.jpg',
     summary:
       'E-commerce prototype for a soccer store built with React and Firebase, focused on clean product browsing, cart interactions, and reliable data sync.',
     note:
@@ -102,7 +102,7 @@ export const portfolioProjects = [
     title: 'ULACIT Parking Service',
     meta: '2023',
     iconKey: 'external',
-    cover: '/ulacit-parking.jpg',
+    cover: '/project-covers/ulacit-parking.jpg',
     summary:
       'Reservation prototype where students book parking spots, combining front-end interactions with PHP and SQL-backed booking and validation flows.',
     note:
@@ -116,7 +116,7 @@ export const portfolioProjects = [
     title: 'College Registration API',
     meta: '2022',
     iconKey: 'server',
-    cover: '/college-registration-api.jpg',
+    cover: '/project-covers/college-registration-api.jpg',
     summary:
       'ASP.NET Core API with layered architecture, authentication, and Swagger that manages students, courses, and supporting academic entities.',
     note:
