@@ -13,6 +13,8 @@ export function HeroGlyph({
   baseRotation = [0, 0, 0],
   mirrored = true,
   materialMode = HERO_MATERIAL_MODES.textured,
+  danceMode = null,
+  letterIndex = 0,
 }) {
   const modelUrl = getHeroGlyphModelUrl(letter, style, { fallbackToAnyStyle: true })
 
@@ -24,6 +26,8 @@ export function HeroGlyph({
       baseRotation={baseRotation}
       mirrored={mirrored}
       materialMode={materialMode}
+      danceMode={danceMode}
+      letterIndex={letterIndex}
     />
   )
 }

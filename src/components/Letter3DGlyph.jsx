@@ -142,8 +142,11 @@ function GlyphModel({
   baseRotation = [0, 0, 0],
   mirrored = true,
   materialMode = HERO_MATERIAL_MODES.textured,
+  danceMode = null,
+  letterIndex = 0,
 }) {
   const groupRef = useRef()
+  const danceClockRef = useRef(null)
   const { scene } = useGLTF(modelUrl)
 
   const model = useMemo(() => {
@@ -179,11 +182,56 @@ function GlyphModel({
     if (!groupRef.current) return
 
     const elapsed = state.clock.elapsedTime
+
+    if (danceMode) {
+      if (danceClockRef.current === null) danceClockRef.current = elapsed
+      const t = elapsed - danceClockRef.current
+      let tY = groupRef.current.rotation.y
+      let tX = 0
+      let tZ = 0
+
+      if (danceMode === 'cascade') {
+        // Staggered fast Y spins — wave of 2× 360° rolls left→right
+        const lt = Math.max(0, t - letterIndex * 0.09)
+        const ease = 1 - Math.pow(1 - Math.min(1, lt / 0.72), 3)
+        tY = ease * Math.PI * 4
+
+      } else if (danceMode === 'rave') {
+        // Counter-rotating chaos — odd/even scissor, X/Y/Z all going
+        const env = Math.min(1, t / 0.18) * (1 - Math.min(1, Math.max(0, (t - 3.0) / 0.5)))
+        const dir = letterIndex % 2 === 0 ? 1 : -1
+        tY = Math.sin(t * 9.0 + letterIndex * 0.55) * env * dir * 1.9
+        tX = Math.sin(t * 7.2 + letterIndex * 0.85) * env * 0.55
+        tZ = Math.sin(t * 5.8 + letterIndex * 1.1)  * env * 0.38
+
+      } else if (danceMode === 'sync') {
+        // All letters spin together simultaneously, one clean 360°
+        const ease = 1 - Math.pow(1 - Math.min(1, t / 1.1), 3)
+        tY = ease * Math.PI * 2
+
+      } else if (danceMode === 'wave') {
+        // Slow elegant Y sweep cascade — luxury showcase feel
+        const phase  = ((t - letterIndex * 0.2) / 2.6) * Math.PI * 2
+        const env    = Math.min(1, t / 0.7) * (1 - Math.max(0, Math.min(1, (t - 4.4) / 0.9)))
+        tY = Math.sin(phase) * 0.78 * env
+        tX = Math.cos(phase) * 0.11 * env
+        tZ = Math.sin(phase * 0.5) * 0.055 * env
+      }
+
+      groupRef.current.rotation.x = THREE.MathUtils.damp(groupRef.current.rotation.x, tX, 10, delta)
+      groupRef.current.rotation.y = THREE.MathUtils.damp(groupRef.current.rotation.y, tY, danceMode === 'wave' ? 3 : 10, delta)
+      groupRef.current.rotation.z = THREE.MathUtils.damp(groupRef.current.rotation.z, tZ, 10, delta)
+      groupRef.current.position.y = THREE.MathUtils.damp(groupRef.current.position.y, 0, 5, delta)
+      return
+    }
+
+    danceClockRef.current = null
+
     const cursorX = -cursorRef.current.x
     const cursorY = cursorRef.current.y
-    const targetX = cursorY * 0.42
-    const targetY = -cursorX * 0.72
-    const targetZ = -cursorX * 0.08
+    const targetX = cursorY * 0.22
+    const targetY = -cursorX * 0.38
+    const targetZ = -cursorX * 0.04
     const targetPosY = Math.sin(elapsed * 0.8) * 0.02 + cursorY * 0.018
 
     groupRef.current.rotation.x = THREE.MathUtils.damp(groupRef.current.rotation.x, targetX, 5.2, delta)
@@ -209,11 +257,23 @@ export default function Letter3DGlyph({
   mirrored = true,
   materialMode = HERO_MATERIAL_MODES.textured,
   title = 'Drag to rotate',
+  danceMode = null,
+  letterIndex = 0,
 }) {
   const glyphRef = useRef()
   const cursorRef = useRef({ x: 0, y: 0 })
   const [webglSupported, setWebglSupported] = useState(false)
   const [isTooltipVisible, setIsTooltipVisible] = useState(false)
+  const [isSwitching, setIsSwitching] = useState(false)
+  const prevModeRef = useRef(materialMode)
+
+  useEffect(() => {
+    if (prevModeRef.current === materialMode) return
+    prevModeRef.current = materialMode
+    setIsSwitching(true)
+    const t = setTimeout(() => setIsSwitching(false), 420)
+    return () => clearTimeout(t)
+  }, [materialMode])
 
   useEffect(() => {
     try {
@@ -302,7 +362,7 @@ export default function Letter3DGlyph({
   return (
     <span
       ref={glyphRef}
-      className={`f3d-glyph image-alphabet-glyph ${isTooltipVisible ? 'tooltip-visible ' : ''}${className}`.trim()}
+      className={`f3d-glyph image-alphabet-glyph ${isTooltipVisible ? 'tooltip-visible ' : ''}${isSwitching ? 'material-switching ' : ''}${className}`.trim()}
       aria-hidden="true"
     >
       <span className="f3d-glyph-tooltip">{title}</span>
@@ -330,6 +390,8 @@ export default function Letter3DGlyph({
             baseRotation={baseRotation}
             mirrored={mirrored}
             materialMode={materialMode}
+            danceMode={danceMode}
+            letterIndex={letterIndex}
           />
         </Suspense>
         <OrbitControls

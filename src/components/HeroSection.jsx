@@ -35,6 +35,38 @@ export default function HeroSection() {
   const scrollRef = useRef()
   const yearRef   = useRef()
   const [materialMode, setMaterialMode] = useState(HERO_MATERIAL_MODES.textured)
+  const [letterModes, setLetterModes] = useState(() => HERO_WORD.map(() => HERO_MATERIAL_MODES.textured))
+  const switchTimeoutsRef = useRef([])
+  const [danceMode, setDanceMode] = useState(null)
+  const danceTimerRef = useRef(null)
+
+  const DANCE_MOVES = [
+    { id: 'cascade', label: '↻', title: 'Cascade',  duration: 1400 },
+    { id: 'rave',    label: '✶', title: 'Rave',      duration: 3800 },
+    { id: 'sync',    label: '◎', title: 'Sync',      duration: 1300 },
+    { id: 'wave',    label: '∿', title: 'Wave',      duration: 5500 },
+  ]
+
+  const handleDance = (id, duration) => {
+    setDanceMode(id)
+    clearTimeout(danceTimerRef.current)
+    danceTimerRef.current = setTimeout(() => setDanceMode(null), duration)
+  }
+
+  const handleMaterialChange = (newMode) => {
+    if (newMode === materialMode) return
+    setMaterialMode(newMode)
+    switchTimeoutsRef.current.forEach(clearTimeout)
+    switchTimeoutsRef.current = HERO_WORD.map((_, i) =>
+      setTimeout(() => {
+        setLetterModes(prev => {
+          const next = [...prev]
+          next[i] = newMode
+          return next
+        })
+      }, i * 75)
+    )
+  }
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -102,7 +134,21 @@ export default function HeroSection() {
               <span className="hero-badge-dot" />
               Contact me for collaborations
             </div>
-            <div className="hero-material-switcher" aria-label="Hero letter materials">
+            <div className="hero-dance-switcher" aria-label="Letter animations">
+              {DANCE_MOVES.map(({ id, label, title, duration }) => (
+                <button
+                  key={id}
+                  type="button"
+                  className={`hero-dance-btn${danceMode === id ? ' active' : ''}`}
+                  aria-label={title}
+                  title={title}
+                  onClick={() => handleDance(id, duration)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          <div className="hero-material-switcher" aria-label="Hero letter materials">
               {HERO_MATERIAL_OPTIONS.map((option) => (
                 <button
                   key={option.id}
@@ -111,7 +157,7 @@ export default function HeroSection() {
                   aria-label={`Use ${option.label} letters`}
                   aria-pressed={materialMode === option.id}
                   title={option.label}
-                  onClick={() => setMaterialMode(option.id)}
+                  onClick={() => handleMaterialChange(option.id)}
                 />
               ))}
             </div>
@@ -127,7 +173,7 @@ export default function HeroSection() {
             <div className="hero-name-row">
               <Parallax speed={-8} className="hero-monogram-parallax">
                 <span className="hero-monogram" ref={monogramRef}>
-                  {HERO_WORD.map(({ id, letter, style, baseRotation, mirrored }) => (
+                  {HERO_WORD.map(({ id, letter, style, baseRotation, mirrored }, i) => (
                     <HeroGlyph
                       key={id}
                       className={`hero-f-glyph hero-letter-${letter.toLowerCase()}`}
@@ -135,7 +181,9 @@ export default function HeroSection() {
                       style={style}
                       baseRotation={baseRotation}
                       mirrored={mirrored}
-                      materialMode={materialMode}
+                      materialMode={letterModes[i]}
+                      danceMode={danceMode}
+                      letterIndex={i}
                     />
                   ))}
                 </span>

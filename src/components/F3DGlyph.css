@@ -66,6 +66,18 @@
   width: 100% !important;
   height: 100% !important;
   display: block;
+  transition: filter 0.3s ease;
+}
+
+.f3d-glyph.material-switching canvas {
+  animation: material-flash 0.42s ease-out forwards;
+}
+
+@keyframes material-flash {
+  0%   { filter: brightness(1) saturate(1); }
+  22%  { filter: brightness(2.8) saturate(0.1) blur(1px); }
+  55%  { filter: brightness(1.4) saturate(1.2); }
+  100% { filter: brightness(1) saturate(1); }
 }
 
 .f3d-glyph-fallback {
