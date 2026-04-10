@@ -6,38 +6,118 @@ import './F3DGlyph.css'
 
 const METAL_TINT = new THREE.Color('#edf3f8')
 const EMISSIVE_TINT = new THREE.Color('#bfd7ff')
+const CHROME_TINT = new THREE.Color('#f7fbff')
 
-function finishMaterial(sourceMaterial) {
-  const baseColor = sourceMaterial?.color?.clone?.().lerp(METAL_TINT, 0.82) ?? METAL_TINT.clone()
+export const HERO_MATERIAL_MODES = {
+  textured: 'textured',
+  platinum: 'platinum',
+  holographic: 'holographic',
+  liquidMetal: 'liquid-metal',
+}
+
+function getMaterialConfig(sourceMaterial, materialMode) {
+  const sourceColor = sourceMaterial?.color?.clone?.() ?? new THREE.Color('#ffffff')
+
+  switch (materialMode) {
+    case HERO_MATERIAL_MODES.platinum:
+      return {
+        color: sourceColor.lerp(METAL_TINT, 0.82),
+        useTextureMaps: false,
+        metalness: 0.88,
+        roughness: 0.12,
+        envMapIntensity: 1.85,
+        clearcoat: 0.78,
+        clearcoatRoughness: 0.08,
+        iridescence: 0.08,
+        sheen: 1,
+        sheenColor: '#f7fbff',
+        sheenRoughness: 0.18,
+        emissive: EMISSIVE_TINT.clone(),
+        emissiveIntensity: 0.025,
+      }
+    case HERO_MATERIAL_MODES.liquidMetal:
+      return {
+        color: sourceColor.lerp(CHROME_TINT, 0.92),
+        useTextureMaps: false,
+        metalness: 1,
+        roughness: 0.055,
+        envMapIntensity: 2.6,
+        clearcoat: 1,
+        clearcoatRoughness: 0.03,
+        iridescence: 0.12,
+        sheen: 0.82,
+        sheenColor: '#ffffff',
+        sheenRoughness: 0.08,
+        emissive: new THREE.Color('#dbe8ff'),
+        emissiveIntensity: 0.018,
+      }
+    case HERO_MATERIAL_MODES.holographic:
+      return {
+        color: sourceColor.lerp(new THREE.Color('#edf8ff'), 0.8),
+        useTextureMaps: false,
+        metalness: 0.42,
+        roughness: 0.09,
+        envMapIntensity: 2,
+        clearcoat: 0.92,
+        clearcoatRoughness: 0.06,
+        iridescence: 0.68,
+        sheen: 1,
+        sheenColor: '#d6f6ff',
+        sheenRoughness: 0.12,
+        emissive: new THREE.Color('#a9d5ff'),
+        emissiveIntensity: 0.03,
+      }
+    case HERO_MATERIAL_MODES.textured:
+    default:
+      return {
+        color: sourceColor.lerp(METAL_TINT, 0.28),
+        useTextureMaps: true,
+        metalness: 0.72,
+        roughness: 0.09,
+        envMapIntensity: 1.78,
+        clearcoat: 0.74,
+        clearcoatRoughness: 0.09,
+        iridescence: 0.06,
+        sheen: 0.6,
+        sheenColor: '#f1f8ff',
+        sheenRoughness: 0.2,
+        emissive: new THREE.Color('#b8d7ff'),
+        emissiveIntensity: 0.016,
+      }
+  }
+}
+
+function finishMaterial(sourceMaterial, materialMode = HERO_MATERIAL_MODES.textured) {
+  const config = getMaterialConfig(sourceMaterial, materialMode)
   const material = new THREE.MeshPhysicalMaterial({
-    color: baseColor,
-    map: sourceMaterial?.map ?? null,
-    normalMap: sourceMaterial?.normalMap ?? null,
-    aoMap: sourceMaterial?.aoMap ?? null,
-    bumpMap: sourceMaterial?.bumpMap ?? null,
+    color: config.color,
+    map: config.useTextureMaps ? sourceMaterial?.map ?? null : null,
+    normalMap: config.useTextureMaps ? sourceMaterial?.normalMap ?? null : null,
+    aoMap: config.useTextureMaps ? sourceMaterial?.aoMap ?? null : null,
+    bumpMap: config.useTextureMaps ? sourceMaterial?.bumpMap ?? null : null,
     alphaMap: sourceMaterial?.alphaMap ?? null,
-    roughnessMap: sourceMaterial?.roughnessMap ?? null,
-    metalnessMap: sourceMaterial?.metalnessMap ?? null,
+    roughnessMap: config.useTextureMaps ? sourceMaterial?.roughnessMap ?? null : null,
+    metalnessMap: config.useTextureMaps ? sourceMaterial?.metalnessMap ?? null : null,
     emissiveMap: null,
     transparent: sourceMaterial?.transparent ?? false,
     opacity: sourceMaterial?.opacity ?? 1,
     side: sourceMaterial?.side ?? THREE.FrontSide,
-    metalness: 0.98,
-    roughness: 0.038,
-    envMapIntensity: 2.18,
-    clearcoat: 1,
-    clearcoatRoughness: 0.021,
-    iridescence: 0.23,
+    metalness: config.metalness,
+    roughness: config.roughness,
+    envMapIntensity: config.envMapIntensity,
+    clearcoat: config.clearcoat,
+    clearcoatRoughness: config.clearcoatRoughness,
+    iridescence: config.iridescence,
     iridescenceIOR: 1.3,
     iridescenceThicknessRange: [165, 390],
-    emissive: EMISSIVE_TINT.clone(),
-    emissiveIntensity: 0.042,
+    emissive: config.emissive,
+    emissiveIntensity: config.emissiveIntensity,
   })
 
   if ('specularIntensity' in material) material.specularIntensity = 1
-  if ('sheen' in material) material.sheen = 1
-  if ('sheenColor' in material) material.sheenColor = new THREE.Color('#f7fbff')
-  if ('sheenRoughness' in material) material.sheenRoughness = 0.1
+  if ('sheen' in material) material.sheen = config.sheen
+  if ('sheenColor' in material) material.sheenColor = new THREE.Color(config.sheenColor)
+  if ('sheenRoughness' in material) material.sheenRoughness = config.sheenRoughness
   if ('reflectivity' in material) material.reflectivity = 1
   material.needsUpdate = true
   return material
@@ -61,6 +141,7 @@ function GlyphModel({
   modelUrl,
   baseRotation = [0, 0, 0],
   mirrored = true,
+  materialMode = HERO_MATERIAL_MODES.textured,
 }) {
   const groupRef = useRef()
   const { scene } = useGLTF(modelUrl)
@@ -75,11 +156,11 @@ function GlyphModel({
       child.receiveShadow = true
 
       if (Array.isArray(child.material)) {
-        child.material = child.material.map((material) => finishMaterial(material))
+        child.material = child.material.map((material) => finishMaterial(material, materialMode))
         return
       }
 
-      child.material = finishMaterial(child.material)
+      child.material = finishMaterial(child.material, materialMode)
     })
 
     const box = new THREE.Box3().setFromObject(clone)
@@ -92,7 +173,7 @@ function GlyphModel({
     const center = centeredBox.getCenter(new THREE.Vector3())
     clone.position.set(-center.x, -center.y - 0.02, -center.z)
     return clone
-  }, [scene])
+  }, [scene, materialMode])
 
   useFrame((state, delta) => {
     if (!groupRef.current) return
@@ -126,11 +207,13 @@ export default function Letter3DGlyph({
   modelUrl,
   baseRotation = [0, 0, 0],
   mirrored = true,
+  materialMode = HERO_MATERIAL_MODES.textured,
   title = 'Drag to rotate',
 }) {
   const glyphRef = useRef()
   const cursorRef = useRef({ x: 0, y: 0 })
   const [webglSupported, setWebglSupported] = useState(false)
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false)
 
   useEffect(() => {
     try {
@@ -170,6 +253,40 @@ export default function Letter3DGlyph({
     }
   }, [])
 
+  useEffect(() => {
+    const glyph = glyphRef.current
+    if (!glyph) return undefined
+
+    function updateTooltipPosition(event) {
+      const rect = glyph.getBoundingClientRect()
+      glyph.style.setProperty('--tooltip-x', `${event.clientX - rect.left}px`)
+      glyph.style.setProperty('--tooltip-y', `${event.clientY - rect.top}px`)
+    }
+
+    function handlePointerEnter(event) {
+      updateTooltipPosition(event)
+      setIsTooltipVisible(true)
+    }
+
+    function handlePointerMove(event) {
+      updateTooltipPosition(event)
+    }
+
+    function handlePointerLeave() {
+      setIsTooltipVisible(false)
+    }
+
+    glyph.addEventListener('pointerenter', handlePointerEnter)
+    glyph.addEventListener('pointermove', handlePointerMove)
+    glyph.addEventListener('pointerleave', handlePointerLeave)
+
+    return () => {
+      glyph.removeEventListener('pointerenter', handlePointerEnter)
+      glyph.removeEventListener('pointermove', handlePointerMove)
+      glyph.removeEventListener('pointerleave', handlePointerLeave)
+    }
+  }, [])
+
   if (!webglSupported) {
     return (
       <span
@@ -185,10 +302,10 @@ export default function Letter3DGlyph({
   return (
     <span
       ref={glyphRef}
-      className={`f3d-glyph image-alphabet-glyph ${className}`.trim()}
+      className={`f3d-glyph image-alphabet-glyph ${isTooltipVisible ? 'tooltip-visible ' : ''}${className}`.trim()}
       aria-hidden="true"
-      title={title}
     >
+      <span className="f3d-glyph-tooltip">{title}</span>
       <Canvas
         camera={{ position: [0, 0, 6.1], fov: 39 }}
         gl={{ alpha: true, antialias: true }}
@@ -212,6 +329,7 @@ export default function Letter3DGlyph({
             modelUrl={modelUrl}
             baseRotation={baseRotation}
             mirrored={mirrored}
+            materialMode={materialMode}
           />
         </Suspense>
         <OrbitControls

@@ -1,4 +1,4 @@
-import Letter3DGlyph, { preloadLetter3DGlyph } from './Letter3DGlyph'
+import Letter3DGlyph, { HERO_MATERIAL_MODES, preloadLetter3DGlyph } from './Letter3DGlyph'
 import {
   HERO_GLYPH_STYLES,
   defaultHeroGlyphSelection,
@@ -12,6 +12,7 @@ export function HeroGlyph({
   style = HERO_GLYPH_STYLES.lightBlue,
   baseRotation = [0, 0, 0],
   mirrored = true,
+  materialMode = HERO_MATERIAL_MODES.textured,
 }) {
   const modelUrl = getHeroGlyphModelUrl(letter, style, { fallbackToAnyStyle: true })
 
@@ -22,6 +23,7 @@ export function HeroGlyph({
       modelUrl={modelUrl}
       baseRotation={baseRotation}
       mirrored={mirrored}
+      materialMode={materialMode}
     />
   )
 }

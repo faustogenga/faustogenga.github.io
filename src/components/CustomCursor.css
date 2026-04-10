@@ -6,28 +6,34 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
+  width: 8px;
+  height: 8px;
+  background: #f6fbff;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   will-change: transform;
-  mix-blend-mode: difference;
+  mix-blend-mode: normal;
+  box-shadow:
+    0 0 0 1px rgba(140, 200, 255, 0.45),
+    0 0 14px rgba(140, 200, 255, 0.5);
 }
 
 .cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 28px;
-  height: 28px;
-  border: 1.5px solid rgba(140, 200, 255, 0.72);
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(220, 241, 255, 0.88);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
   will-change: transform;
-  mix-blend-mode: difference;
+  mix-blend-mode: normal;
+  box-shadow:
+    inset 0 0 0 1px rgba(140, 200, 255, 0.22),
+    0 0 18px rgba(140, 200, 255, 0.18);
 }
 
 @media (pointer: coarse) {

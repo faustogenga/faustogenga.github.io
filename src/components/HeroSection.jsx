@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
@@ -7,6 +7,7 @@ import { Parallax } from 'react-scroll-parallax'
 import HeroCosmosCanvas from './HeroCosmosCanvas'
 import { HeroGlyph } from './F3DGlyph'
 import HeroWordmark from './HeroWordmark'
+import { HERO_MATERIAL_MODES } from './Letter3DGlyph'
 import './HeroSection.css'
 import { HERO_GLYPH_STYLES } from '../data/heroGlyphStyles'
 
@@ -19,6 +20,13 @@ const HERO_WORD = [
   { id: 'O', letter: 'O', style: HERO_GLYPH_STYLES.lightBlue },
 ]
 
+const HERO_MATERIAL_OPTIONS = [
+  { id: HERO_MATERIAL_MODES.textured, label: 'Texture', swatchClassName: 'texture' },
+  { id: HERO_MATERIAL_MODES.platinum, label: 'Platinum', swatchClassName: 'platinum' },
+  { id: HERO_MATERIAL_MODES.holographic, label: 'Holographic', swatchClassName: 'holographic' },
+  { id: HERO_MATERIAL_MODES.liquidMetal, label: 'Liquid', swatchClassName: 'liquid-metal' },
+]
+
 export default function HeroSection() {
   const heroRef   = useRef()
   const badgeRef  = useRef()
@@ -26,6 +34,7 @@ export default function HeroSection() {
   const bottomRef = useRef()
   const scrollRef = useRef()
   const yearRef   = useRef()
+  const [materialMode, setMaterialMode] = useState(HERO_MATERIAL_MODES.textured)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -88,9 +97,24 @@ export default function HeroSection() {
 
         {/* Top row */}
         <div className="hero-top">
-          <div className="hero-badge" ref={badgeRef}>
-            <span className="hero-badge-dot" />
-            Contact me for collaborations
+          <div className="hero-top-badge-group" ref={badgeRef}>
+            <div className="hero-badge">
+              <span className="hero-badge-dot" />
+              Contact me for collaborations
+            </div>
+            <div className="hero-material-switcher" aria-label="Hero letter materials">
+              {HERO_MATERIAL_OPTIONS.map((option) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  className={`hero-material-toggle hero-material-toggle-${option.swatchClassName}${materialMode === option.id ? ' active' : ''}`}
+                  aria-label={`Use ${option.label} letters`}
+                  aria-pressed={materialMode === option.id}
+                  title={option.label}
+                  onClick={() => setMaterialMode(option.id)}
+                />
+              ))}
+            </div>
           </div>
           <span className="hero-year" ref={yearRef}>
             {new Date().getFullYear()}
@@ -111,6 +135,7 @@ export default function HeroSection() {
                       style={style}
                       baseRotation={baseRotation}
                       mirrored={mirrored}
+                      materialMode={materialMode}
                     />
                   ))}
                 </span>
@@ -124,7 +149,6 @@ export default function HeroSection() {
         {/* Bottom bar */}
         <div className="hero-bottom" ref={bottomRef}>
           <div className="hero-role">
-            <span className="hero-role-kicker">Current focus</span>
             <div className="hero-role-list">
               <span className="hero-role-item">Web App Development</span>
               <span className="hero-role-item">Informatics Engineer</span>

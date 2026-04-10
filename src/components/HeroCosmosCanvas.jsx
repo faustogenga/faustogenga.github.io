@@ -50,7 +50,7 @@ export default function HeroCosmosCanvas({ heroRef, attractorRef }) {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches
-    const starCount = prefersReducedMotion ? 40 : isCoarsePointer ? 55 : 90
+    const starCount = prefersReducedMotion ? 48 : isCoarsePointer ? 68 : 112
     const cometCount = prefersReducedMotion ? 4 : isCoarsePointer ? 6 : 10
 
     let width = 0
