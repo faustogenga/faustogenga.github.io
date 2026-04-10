@@ -369,7 +369,7 @@ export default function Letter3DGlyph({
       <Canvas
         camera={{ position: [0, 0, 6.1], fov: 39 }}
         gl={{ alpha: true, antialias: true }}
-        dpr={[1, 2]}
+        dpr={window.matchMedia('(pointer: coarse)').matches ? [1, 1.5] : [1, 2]}
         onCreated={({ gl, scene }) => {
           gl.toneMapping = THREE.ACESFilmicToneMapping
           gl.toneMappingExposure = 0.96
