@@ -47,13 +47,14 @@ export default function HeroSection() {
     { id: 'wave',    label: '∿', title: 'Wave',      duration: 5500 },
   ]
 
-  const handleDance = (id, duration) => {
-    setDanceMode(id)
-    clearTimeout(danceTimerRef.current)
-    danceTimerRef.current = setTimeout(() => setDanceMode(null), duration)
-  }
+  const MATERIAL_CYCLE = [
+    HERO_MATERIAL_MODES.textured,
+    HERO_MATERIAL_MODES.holographic,
+    HERO_MATERIAL_MODES.platinum,
+    HERO_MATERIAL_MODES.liquidMetal,
+  ]
 
-  const handleMaterialChange = (newMode) => {
+  const handleMaterialChange = (newMode, stagger = 75) => {
     if (newMode === materialMode) return
     setMaterialMode(newMode)
     switchTimeoutsRef.current.forEach(clearTimeout)
@@ -64,8 +65,19 @@ export default function HeroSection() {
           next[i] = newMode
           return next
         })
-      }, i * 75)
+      }, i * stagger)
     )
+  }
+
+  const handleDance = (id, duration) => {
+    // On each dance, cascade to the next material in the cycle
+    const currentIdx = MATERIAL_CYCLE.indexOf(materialMode)
+    const nextMaterial = MATERIAL_CYCLE[(currentIdx + 1) % MATERIAL_CYCLE.length]
+    handleMaterialChange(nextMaterial, 220)
+
+    setDanceMode(id)
+    clearTimeout(danceTimerRef.current)
+    danceTimerRef.current = setTimeout(() => setDanceMode(null), duration)
   }
 
   useEffect(() => {
