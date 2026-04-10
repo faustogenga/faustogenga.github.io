@@ -23,7 +23,7 @@ export const portfolioProjects = [
     title: 'Docto',
     meta: 'Current role',
     iconKey: 'stethoscope',
-    cover: '/project-covers/docto.png',
+    cover: '/project-covers/docto.webp',
     summary:
       'Contributed to the development of a specialist telehealth platform used by patients, workplaces, and healthcare providers for consultations, specialist bookings, and care journeys.',
     note:
@@ -36,7 +36,7 @@ export const portfolioProjects = [
     title: 'The Net',
     meta: 'Client work',
     iconKey: 'globe',
-    cover: '/project-covers/the-net.png',
+    cover: '/project-covers/the-net.webp',
     summary:
       'Contributed to the development of a global padel marketplace that connects coaches with clubs, making it easier to discover international opportunities and hire top-tier talent.',
     note:
@@ -49,7 +49,7 @@ export const portfolioProjects = [
     title: 'LilosRentals',
     meta: 'Friend project',
     iconKey: 'motorcycle',
-    cover: '/project-covers/lilos-rentals.png',
+    cover: '/project-covers/lilos-rentals.webp',
     summary:
       'Built a polished rental booking experience for a friend, helping travelers in Tamarindo browse scooters, understand the offer quickly, and reserve with a strong tourism-first UI.',
     note:
@@ -62,7 +62,7 @@ export const portfolioProjects = [
     title: 'Animal Image Classification',
     meta: '2024',
     iconKey: 'brain',
-    cover: '/project-covers/animal-classification.png',
+    cover: '/project-covers/animal-classification.webp',
     summary:
       'Image classification pipeline for 12 animal classes using deep learning with PyTorch and traditional ML approaches with feature extraction and classical classifiers.',
     note:
@@ -116,7 +116,7 @@ export const portfolioProjects = [
     title: 'College Registration API',
     meta: '2022',
     iconKey: 'server',
-    cover: '/project-covers/college-registration-api.png',
+    cover: '/project-covers/college-registration-api.webp',
     summary:
       'ASP.NET Core API with layered architecture, authentication, and Swagger that manages students, courses, and supporting academic entities.',
     note:

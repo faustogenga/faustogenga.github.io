@@ -52,8 +52,8 @@ export function U3DGlyph({ className = '' }) {
   return <HeroGlyph className={className} letter="U" style={defaultHeroGlyphSelection.U} />
 }
 
-Object.values(heroGlyphLibrary).forEach((styleGroup) => {
-  Object.values(styleGroup.letters).forEach((modelUrl) => {
-    preloadLetter3DGlyph(modelUrl)
-  })
+// Only preload the 6 letters actually rendered — stops loading unused variants
+;['F', 'A', 'U', 'S', 'T', 'O'].forEach((letter) => {
+  const url = getHeroGlyphModelUrl(letter, HERO_GLYPH_STYLES.lightBlue)
+  if (url) preloadLetter3DGlyph(url)
 })
