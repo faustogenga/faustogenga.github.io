@@ -1,0 +1,235 @@
+/* ============================================================
+   HERO SPECIAL COMETS
+   Rare, clickable fire-comets that trigger letter dances.
+   ============================================================ */
+
+.hsc-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 99999;
+}
+
+/* ─── Comet wrapper (positioned at head) ─────────────────── */
+
+.hsc-comet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hsc-comet--hovering {
+  pointer-events: none; /* hit-area child handles interaction */
+}
+
+/* ─── Tail ────────────────────────────────────────────────── */
+/*
+ * .hsc-tail-wrap rotates so that the tail trails BEHIND the head.
+ * travel-deg = direction of motion; +180° = backward.
+ * transform-origin: 0 0 → rotates around the head position.
+ * The tail elements extend to the right (+x) inside the wrap,
+ * which after rotation points backward.
+ */
+
+.hsc-tail-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(calc(var(--travel-deg) + 180deg));
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+/* Wide, soft glow */
+.hsc-tail-bloom {
+  position: absolute;
+  top: -9px;
+  left: 0;
+  width: 145px;
+  height: 18px;
+  background: linear-gradient(to right, var(--color-glow), transparent);
+  filter: blur(7px);
+  opacity: 0.8;
+}
+
+/* Narrow bright core */
+.hsc-tail-core {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 95px;
+  height: 4px;
+  background: linear-gradient(to right, var(--color-core), transparent);
+  filter: blur(1px);
+}
+
+/* Ember & nova get a slightly bigger, fiercer tail */
+.hsc-comet--ember .hsc-tail-bloom,
+.hsc-comet--nova  .hsc-tail-bloom {
+  width: 170px;
+  height: 22px;
+  filter: blur(9px);
+  opacity: 0.88;
+}
+
+.hsc-comet--ember .hsc-tail-core,
+.hsc-comet--nova  .hsc-tail-core {
+  width: 110px;
+  height: 5px;
+}
+
+/* ─── Hit area (transparent, gives the 0×0 comet div a clickable surface) ── */
+
+.hsc-hit-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 72px;
+  height: 72px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: auto;   /* always clickable */
+  cursor: pointer;
+}
+
+.hsc-comet--exploding .hsc-hit-area,
+.hsc-comet--exiting   .hsc-hit-area {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* ─── Head ────────────────────────────────────────────────── */
+
+.hsc-head {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-core);
+  box-shadow:
+    0 0  0  2px var(--color-core),
+    0 0  12px  5px var(--color-glow),
+    0 0  32px 12px var(--color-bloom);
+  z-index: 2;
+  pointer-events: none;
+  transition: box-shadow 0.2s;
+}
+
+/* Hover: slightly bigger glow */
+.hsc-comet--hovering .hsc-head {
+  box-shadow:
+    0 0  0  2px var(--color-core),
+    0 0  18px  8px var(--color-glow),
+    0 0  50px 18px var(--color-bloom);
+}
+
+/* ─── Hover pulse ring ────────────────────────────────────── */
+
+.hsc-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-glow);
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hsc-comet--hovering .hsc-ring {
+  animation: hsc-pulse 1.5s ease-out infinite;
+}
+
+@keyframes hsc-pulse {
+  0%   { opacity: 0.85; transform: translate(-50%, -50%) scale(0.9); }
+  100% { opacity: 0;    transform: translate(-50%, -50%) scale(3);   }
+}
+
+/* ─── Hover hint ─────────────────────────────────────────── */
+
+.hsc-hint {
+  position: absolute;
+  top: -22px;
+  left: 0;
+  transform: translateX(-50%);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-core);
+  text-shadow: 0 0 6px var(--color-glow);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+  transition: opacity 0.5s ease;
+}
+
+.hsc-comet--hovering .hsc-hint {
+  opacity: 1;
+  animation: hsc-hint-bob 1.8s ease-in-out infinite;
+}
+
+@keyframes hsc-hint-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0);    }
+  50%       { transform: translateX(-50%) translateY(-4px); }
+}
+
+/* ─── Explosion ──────────────────────────────────────────── */
+
+.hsc-comet--exploding .hsc-head {
+  animation: hsc-explode-head 0.55s ease-out forwards;
+}
+
+.hsc-comet--exploding .hsc-tail-wrap {
+  transition: opacity 0.08s;
+  opacity: 0;
+}
+
+.hsc-comet--exploding .hsc-ring,
+.hsc-comet--exploding .hsc-hint {
+  opacity: 0;
+  transition: opacity 0.08s;
+}
+
+@keyframes hsc-explode-head {
+  0%   { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+  25%  { transform: translate(-50%, -50%) scale(4.5); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+}
+
+/* ─── Burst particles ────────────────────────────────────── */
+
+.hsc-particle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:  var(--p-size);
+  height: var(--p-size);
+  border-radius: 50%;
+  background: var(--color-core);
+  box-shadow: 0 0 5px 2px var(--color-glow);
+  opacity: 0;
+  pointer-events: none;
+  animation: hsc-burst 0.65s ease-out forwards;
+  animation-delay: var(--p-delay);
+}
+
+@keyframes hsc-burst {
+  0% {
+    opacity: 1;
+    transform: translate(calc(-50% + 0px), calc(-50% + 0px)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--p-tx)), calc(-50% + var(--p-ty))) scale(0.2);
+  }
+}

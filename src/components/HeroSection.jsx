@@ -8,6 +8,7 @@ import HeroCosmosCanvas from './HeroCosmosCanvas'
 import { HeroGlyph } from './F3DGlyph'
 import HeroWordmark from './HeroWordmark'
 import { HERO_MATERIAL_MODES } from './Letter3DGlyph'
+import HeroSpecialComets from './HeroSpecialComets'
 import './HeroSection.css'
 import { HERO_GLYPH_STYLES } from '../data/heroGlyphStyles'
 
@@ -136,6 +137,8 @@ export default function HeroSection() {
       <div className="hero-cosmos" aria-hidden="true">
         <HeroCosmosCanvas heroRef={heroRef} attractorRef={monogramRef} />
       </div>
+
+      <HeroSpecialComets containerRef={heroRef} onTrigger={handleDance} />
 
       <div className="hero-inner">
 

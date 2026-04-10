@@ -19,7 +19,7 @@ function createStar(width, height) {
 
 function createComet(width, height) {
   const angle = randomBetween(-0.6, -0.18)
-  const speed = randomBetween(220, 420)
+  const speed = randomBetween(45, 95)
   return {
     x: randomBetween(-width * 0.18, width * 1.08),
     y: randomBetween(0, height),

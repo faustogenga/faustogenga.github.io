@@ -199,7 +199,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: var(--fg-subtle);
+  color: var(--accent);
   font-variant-numeric: tabular-nums;
 }
 

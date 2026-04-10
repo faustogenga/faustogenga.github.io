@@ -116,7 +116,7 @@ export const portfolioProjects = [
     title: 'College Registration API',
     meta: '2022',
     iconKey: 'server',
-    cover: '/project-covers/college-registration-api.jpg',
+    cover: '/project-covers/college-registration-api.png',
     summary:
       'ASP.NET Core API with layered architecture, authentication, and Swagger that manages students, courses, and supporting academic entities.',
     note:
