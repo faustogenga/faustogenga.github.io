@@ -60,6 +60,7 @@
   grid-template-columns: minmax(360px, 0.88fr) minmax(560px, 1.12fr);
   gap: 40px;
   min-height: 560px;
+  align-items: center;
   padding: 38px;
   border: 1px solid rgba(240, 237, 230, 0.08);
   border-radius: 34px;
@@ -173,79 +174,73 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-.featured-project-visual {
+.featured-project-shot {
   position: relative;
-  min-height: 484px;
-  border-radius: 28px;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100%;
   padding: 18px;
-  background:
-    radial-gradient(circle at top right, rgba(var(--project-glow), 0.18), transparent 34%),
-    radial-gradient(circle at bottom left, rgba(255, 166, 198, 0.1), transparent 36%),
-    linear-gradient(135deg, rgba(var(--project-accent), 0.08), rgba(255, 255, 255, 0.02) 42%, rgba(255, 212, 148, 0.06)),
-    rgba(255, 255, 255, 0.018);
-}
-
-.featured-project-shot {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
   border-radius: 30px;
-  overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02)),
-    linear-gradient(145deg, rgba(var(--project-glow), 0.08), rgba(8, 10, 16, 0.1) 38%, rgba(255, 176, 198, 0.06));
-  border: 1px solid rgba(var(--project-glow), 0.22);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.02)),
+    linear-gradient(145deg, rgba(var(--project-glow), 0.12), rgba(8, 10, 16, 0.14) 38%, rgba(255, 176, 198, 0.08));
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
     0 28px 50px rgba(0, 0, 0, 0.28),
     0 0 0 1px rgba(255, 182, 193, 0.04);
-}
-
-.featured-project-shot-parallax {
-  width: 100%;
-  height: 100%;
+  isolation: isolate;
 }
 
 .featured-project-shot::before {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
+  inset: 1px;
+  border-radius: 28px;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 18%),
-    linear-gradient(180deg, transparent 68%, rgba(10, 13, 20, 0.16));
+    linear-gradient(135deg, rgba(var(--project-glow), 0.18), transparent 24%, transparent 72%, rgba(255, 255, 255, 0.12)),
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 34%);
+  opacity: 0.9;
   pointer-events: none;
 }
 
-.featured-project-shot img {
+.featured-project-shot::after {
+  content: '';
   position: absolute;
-  inset: 12px;
+  inset: 10px;
+  border-radius: 24px;
+  border: 1px solid rgba(var(--project-glow), 0.2);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 0 24px rgba(var(--project-glow), 0.12);
+  pointer-events: none;
+}
+
+.featured-project-shot-parallax {
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+}
+
+
+.featured-project-shot img {
+  position: relative;
+  z-index: 1;
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center center;
+  max-width: 100%;
+  height: auto;
   border-radius: 22px;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 58%),
     linear-gradient(180deg, rgba(6, 9, 14, 0.14), rgba(6, 9, 14, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.14);
   filter: saturate(1.08) contrast(1.04);
-}
-
-.featured-project-orb {
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  top: -82px;
-  left: -56px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(var(--project-glow), 0.46), rgba(var(--project-accent), 0.08) 62%, transparent 76%);
-  z-index: 1;
-  pointer-events: none;
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transform: perspective(1600px) rotateY(-5deg) rotateX(2deg);
+  transform-origin: center center;
 }
 
 .featured-project:nth-child(even) {
@@ -259,17 +254,9 @@
     rgba(255, 255, 255, 0.01);
 }
 
-.featured-project:nth-child(even) .featured-project-visual {
-  order: 1;
-}
 
 .featured-project:nth-child(even) .featured-project-copy {
   order: 2;
-}
-
-.featured-project:nth-child(even) .featured-project-orb {
-  left: auto;
-  right: -56px;
 }
 
 .project-card-actions {
@@ -386,14 +373,13 @@
     gap: 24px;
   }
 
-  .featured-project-visual {
-    min-height: 340px;
+  .featured-project-shot {
     padding: 14px;
   }
 
   .featured-project-shot img {
-    inset: 8px;
     border-radius: 20px;
+    transform: none;
   }
 }
 

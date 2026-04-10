@@ -124,22 +124,20 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(10px, 1.6vw, 22px);
+  gap: clamp(4px, 0.8vw, 12px);
   overflow: visible;
-  transform: translateY(-190px);
+  flex-wrap: nowrap;
+  transform: translateY(-150px);
+  transform-origin: center center;
 }
 
 .hero-monogram .hero-f-glyph {
-  width: clamp(156px, 20vw, 286px);
-  height: clamp(222px, 42vh, 418px);
-}
-
-.hero-monogram .hero-a-glyph {
-  margin-left: clamp(-84px, -7vw, -42px);
+  width: clamp(156px, 18vw, 252px);
+  height: clamp(262px, 46vh, 414px);
 }
 
 .hero-wordmark {
-  margin-top: -430px;
+  margin-top: -360px;
   font-family: 'Bodoni Moda', 'Times New Roman', serif;
   font-size: clamp(1.28rem, 2.6vw, 2.2rem);
   font-weight: 600;
@@ -152,6 +150,13 @@
   max-width: 100vw;
   position: relative;
   z-index: 1;
+}
+
+.hero-letter-u,
+.hero-letter-s,
+.hero-letter-t,
+.hero-letter-o {
+  margin-left: clamp(-10px, -1vw, -4px);
 }
 
 /* --- Bottom row --- */

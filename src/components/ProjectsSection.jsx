@@ -49,7 +49,7 @@ function FeaturedProject({ project, index = 0 }) {
     { glow: '171 201 255', accent: '124 168 255' },
   ]
   const tint = tintVariants[index % tintVariants.length]
-  const imageSpeed = index % 2 === 0 ? -6 : 6
+  const imageSpeed = index % 2 === 0 ? -3 : 3
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -93,14 +93,11 @@ function FeaturedProject({ project, index = 0 }) {
         <ProjectActions project={project} />
       </div>
 
-      <div className="featured-project-visual">
-        <div className="featured-project-orb" />
-        <Parallax speed={imageSpeed} className="featured-project-shot-parallax">
-          <div className="featured-project-shot">
-            <img src={project.cover} alt={`${project.title} showcase`} loading="lazy" />
-          </div>
-        </Parallax>
-      </div>
+      <Parallax speed={imageSpeed}className='featured-project-shot-parallax'>
+        <div className="featured-project-shot">
+          <img src={project.cover} alt={`${project.title} showcase`} loading="lazy" />
+        </div>
+      </Parallax>
     </article>
   )
 }

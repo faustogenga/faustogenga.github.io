@@ -1,28 +1,53 @@
-import fModelUrl from '../assets/F_3D.glb?url'
-import aModelUrl from '../assets/A_3D.glb?url'
-import sModelUrl from '../assets/S_3D.glb?url'
 import Letter3DGlyph, { preloadLetter3DGlyph } from './Letter3DGlyph'
+import {
+  HERO_GLYPH_STYLES,
+  defaultHeroGlyphSelection,
+  getHeroGlyphModelUrl,
+  heroGlyphLibrary,
+} from '../data/heroGlyphStyles'
+
+export function HeroGlyph({
+  className = '',
+  letter,
+  style = HERO_GLYPH_STYLES.lightBlue,
+  baseRotation = [0, 0, 0],
+  mirrored = true,
+}) {
+  const modelUrl = getHeroGlyphModelUrl(letter, style, { fallbackToAnyStyle: true })
+
+  return (
+    <Letter3DGlyph
+      className={className}
+      fallbackLetter={letter}
+      modelUrl={modelUrl}
+      baseRotation={baseRotation}
+      mirrored={mirrored}
+    />
+  )
+}
 
 export default function F3DGlyph({ className = '' }) {
-  return <Letter3DGlyph className={className} fallbackLetter="F" modelUrl={fModelUrl} />
+  return <HeroGlyph className={className} letter="F" style={defaultHeroGlyphSelection.F} />
 }
 
 export function A3DGlyph({ className = '' }) {
   return (
-    <Letter3DGlyph
+    <HeroGlyph
       className={className}
-      fallbackLetter="A"
-      modelUrl={aModelUrl}
+      letter="A"
+      style={defaultHeroGlyphSelection.A}
       baseRotation={[0, -Math.PI / 2, 0]}
       mirrored={false}
     />
   )
 }
 
-export function S3DGlyph({ className = '' }) {
-  return <Letter3DGlyph className={className} fallbackLetter="S" modelUrl={sModelUrl} />
+export function U3DGlyph({ className = '' }) {
+  return <HeroGlyph className={className} letter="U" style={defaultHeroGlyphSelection.U} />
 }
 
-preloadLetter3DGlyph(fModelUrl)
-preloadLetter3DGlyph(aModelUrl)
-preloadLetter3DGlyph(sModelUrl)
+Object.values(heroGlyphLibrary).forEach((styleGroup) => {
+  Object.values(styleGroup.letters).forEach((modelUrl) => {
+    preloadLetter3DGlyph(modelUrl)
+  })
+})

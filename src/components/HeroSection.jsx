@@ -5,9 +5,19 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import { faDownload, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { Parallax } from 'react-scroll-parallax'
 import HeroCosmosCanvas from './HeroCosmosCanvas'
-import F3DGlyph, { A3DGlyph, S3DGlyph } from './F3DGlyph'
+import { HeroGlyph } from './F3DGlyph'
 import HeroWordmark from './HeroWordmark'
 import './HeroSection.css'
+import { HERO_GLYPH_STYLES } from '../data/heroGlyphStyles'
+
+const HERO_WORD = [
+  { id: 'F', letter: 'F', style: HERO_GLYPH_STYLES.lightBlue },
+  { id: 'A', letter: 'A', style: HERO_GLYPH_STYLES.lightBlue, baseRotation: [0, -Math.PI / 2, 0], mirrored: false },
+  { id: 'U', letter: 'U', style: HERO_GLYPH_STYLES.lightBlue },
+  { id: 'S', letter: 'S', style: HERO_GLYPH_STYLES.lightBlue, mirrored: false },
+  { id: 'T', letter: 'T', style: HERO_GLYPH_STYLES.lightBlue },
+  { id: 'O', letter: 'O', style: HERO_GLYPH_STYLES.lightBlue },
+]
 
 export default function HeroSection() {
   const heroRef   = useRef()
@@ -93,9 +103,16 @@ export default function HeroSection() {
             <div className="hero-name-row">
               <Parallax speed={-8} className="hero-monogram-parallax">
                 <span className="hero-monogram" ref={monogramRef}>
-                  <F3DGlyph className="hero-f-glyph" />
-                  <A3DGlyph className="hero-f-glyph hero-a-glyph" />
-                  <S3DGlyph className="hero-f-glyph hero-s-glyph" />
+                  {HERO_WORD.map(({ id, letter, style, baseRotation, mirrored }) => (
+                    <HeroGlyph
+                      key={id}
+                      className={`hero-f-glyph hero-letter-${letter.toLowerCase()}`}
+                      letter={letter}
+                      style={style}
+                      baseRotation={baseRotation}
+                      mirrored={mirrored}
+                    />
+                  ))}
                 </span>
               </Parallax>
             </div>
